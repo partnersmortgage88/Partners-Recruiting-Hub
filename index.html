@@ -525,7 +525,7 @@ h2.head em{font-style:italic;color:var(--teal)}
   background:radial-gradient(130% 130% at 18% 0%, #0a8f9b 0%, var(--teal-deep) 52%, #02343a 100%)}
 .setup.show{display:flex;animation:fadeIn .35s var(--eo)}
 .setup .card{width:100%;max-width:640px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-xl);
-  padding:42px 44px;box-shadow:var(--shadow-lg);animation:setupRise .55s var(--eo) both}
+  padding:42px 44px;box-shadow:var(--shadow-lg);animation:setupRise .55s var(--eo) both;max-height:92vh;overflow-y:auto}
 @keyframes setupRise{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
 .setup .slogo{height:34px;width:auto;margin-bottom:20px}
 .setup .eyebrow{margin-bottom:14px}
@@ -538,6 +538,20 @@ h2.head em{font-style:italic;color:var(--teal)}
 .setup .pzsub{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:var(--teal);
   margin:6px 0 -4px;padding-top:14px;border-top:1px solid var(--line)}
 @media(max-width:560px){.setup .card{padding:30px 24px}.setup .row3,.setup .row2{grid-template-columns:1fr}}
+.setup .pzhint{font-family:var(--sans);text-transform:none;letter-spacing:0;color:var(--muted);font-weight:400;margin-left:6px}
+.mgr-toggle{display:flex;align-items:center;gap:10px;margin-top:12px;cursor:pointer;font-size:.95rem;color:var(--ink);font-family:var(--sans);justify-content:flex-start}
+.mgr-toggle input{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex:none;margin:0}
+.mgr-toggle span{flex:1}
+.mgr-fields{display:grid;gap:13px;margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.mgr-fields textarea{width:100%;resize:vertical;min-height:74px;font-family:var(--sans);font-size:.95rem;line-height:1.5;padding:11px 13px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--ink);box-sizing:border-box}
+.mgr-fields textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-tint)}
+.mgr-photo{display:flex;align-items:center;gap:14px}
+.mgr-drop{width:84px;height:84px;flex:none;border:1.5px dashed var(--line-strong);border-radius:14px;background:var(--surface);display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;overflow:hidden;transition:border-color .2s}
+.mgr-drop:hover{border-color:var(--teal)}
+.mgr-drop img{width:100%;height:100%;object-fit:cover}
+.mgr-dt{font-family:var(--mono);font-size:.56rem;line-height:1.5;color:var(--muted);padding:6px}
+.mgr-clear{border:none;background:none;color:var(--muted);font-family:var(--sans);font-size:.84rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.mgr-clear:hover{color:#B23B3B}
 .setup label{display:block;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.64rem;color:var(--muted);margin-bottom:7px}
 .setup .ip{position:relative}
 .setup .ip .pre{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-weight:500;color:var(--muted);font-size:1.05rem}
@@ -992,6 +1006,25 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
         <p data-reveal>He has hired and onboarded over <strong>1,000 loan officers</strong>. Before mortgage, he spent three years working for Tony Robbins, which shaped his values-driven leadership and, by his own admission, made him <em>"annoyingly positive."</em></p>
         <p id="peter-close" data-reveal>He isn't just recruiting. He measures his own win by whether you're winning. If you're considering Partners, Peter is your first call.</p>
         <div class="chips" data-reveal><span class="chip">SUNY New Paltz</span><span class="chip">1,000+ LOs Hired</span><span class="chip">Formerly Tony Robbins</span><span class="chip">Annoyingly Positive 😄</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6b MANAGER (optional, shown only when personalized with a manager) -->
+<section class="slide bg-light" data-sec="Leadership" id="slide-manager" style="display:none">
+  <div class="wrap">
+    <div class="leader">
+      <div class="photo" data-reveal>
+        <span class="initials" id="mgr-initials">M</span>
+        <img id="mgr-img" alt="" referrerpolicy="no-referrer" decoding="async" style="display:none">
+        <div class="tag"><div class="role" id="mgr-tag-role">Manager</div><div class="loc" id="mgr-tag-loc">Your team lead</div></div>
+      </div>
+      <div>
+        <span class="eyebrow" data-reveal>Your manager &middot; Here to back you</span>
+        <h2 data-reveal id="mgr-name">Manager</h2>
+        <div class="sub" data-reveal id="mgr-title">Branch Manager</div>
+        <div id="mgr-bio-wrap" data-reveal></div>
       </div>
     </div>
   </div>
@@ -1661,6 +1694,34 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
         </div>
       </div>
     </div>
+
+    <div class="pzsub">Add a manager slide? <span class="pzhint">Shown right after Peter, only if filled in</span></div>
+    <label class="mgr-toggle"><input type="checkbox" id="su-mgr-on"> <span>Include a manager on this presentation</span></label>
+    <div class="mgr-fields" id="su-mgr-fields" style="display:none">
+      <div class="row2">
+        <div>
+          <label for="su-mgr-name">Manager name</label>
+          <input type="text" id="su-mgr-name" placeholder="e.g. Sarah Whitfield" autocomplete="off">
+        </div>
+        <div>
+          <label for="su-mgr-title">Title / role</label>
+          <input type="text" id="su-mgr-title" placeholder="e.g. Branch Manager" autocomplete="off">
+        </div>
+      </div>
+      <div>
+        <label for="su-mgr-bio">Bio to share</label>
+        <textarea id="su-mgr-bio" rows="3" placeholder="A few sentences about the manager — background, what they bring, why the recruit will love working with them."></textarea>
+      </div>
+      <div class="mgr-photo">
+        <div class="mgr-drop" id="su-mgr-drop">
+          <img id="su-mgr-preview" alt="" style="display:none">
+          <div class="mgr-dt" id="su-mgr-label">Click to add a photo (optional)</div>
+        </div>
+        <input type="file" id="su-mgr-photo" accept="image/*" style="display:none">
+        <button type="button" class="mgr-clear" id="su-mgr-clear" style="display:none">Remove photo</button>
+      </div>
+    </div>
+
     <div class="acts">
       <button class="begin" id="su-begin">Begin Presentation <span class="ar">&rarr;</span></button>
       <button class="skip" id="su-skip">Skip &mdash; use sample numbers</button>
@@ -1826,19 +1887,31 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   }
 
   /* ---- deck navigation ---- */
-  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var allSlides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var slides=allSlides.filter(function(s){ return s.style.display!=='none'; });
   var total=slides.length, cur=0, initialized=false;
   var navEl=document.getElementById('nav'), countEl=document.getElementById('count'),
       bar=document.getElementById('progressbar'), prevBtn=document.getElementById('prev'),
       nextBtn=document.getElementById('next'), hint=document.getElementById('hint');
 
   var sectionOrder=[], sectionFirst={};
-  slides.forEach(function(s,i){ var sec=s.getAttribute('data-sec'); if(sectionFirst[sec]===undefined){ sectionFirst[sec]=i; sectionOrder.push(sec);} });
-  sectionOrder.forEach(function(sec){
-    var b=document.createElement('button'); b.textContent=sec;
-    b.addEventListener('click',function(){ go(sectionFirst[sec]); });
-    navEl.appendChild(b);
-  });
+  function buildSectionNav(){
+    sectionOrder=[]; sectionFirst={};
+    slides.forEach(function(s,i){ var sec=s.getAttribute('data-sec'); if(sectionFirst[sec]===undefined){ sectionFirst[sec]=i; sectionOrder.push(sec);} });
+    navEl.innerHTML='';
+    sectionOrder.forEach(function(sec){
+      var b=document.createElement('button'); b.textContent=sec;
+      b.addEventListener('click',function(){ go(sectionFirst[sec]); });
+      navEl.appendChild(b);
+    });
+  }
+  function rebuildSlides(){
+    slides=allSlides.filter(function(s){ return s.style.display!=='none'; });
+    total=slides.length;
+    buildSectionNav();
+    if(typeof buildOverview==='function') buildOverview();
+  }
+  buildSectionNav();
   function pad(n){ return (n<10?'0':'')+n; }
 
   function runReveals(slide){
@@ -2007,14 +2080,18 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 
   /* ---- overview ---- */
   var ov=document.getElementById('overview'), ovgrid=document.getElementById('ovgrid');
-  slides.forEach(function(s,i){
-    var h=s.querySelector('h1,h2');
-    var title=h?h.textContent.replace(/\s+/g,' ').trim():('Slide '+(i+1));
-    var c=document.createElement('div'); c.className='ovcard';
-    c.innerHTML='<div class="ovn">'+pad(i+1)+' &middot; '+s.getAttribute('data-sec')+'</div><div class="ovt">'+title+'</div>';
-    c.addEventListener('click',function(){ go(i); hideOv(); });
-    ovgrid.appendChild(c);
-  });
+  function buildOverview(){
+    ovgrid.innerHTML='';
+    slides.forEach(function(s,i){
+      var h=s.querySelector('h1,h2');
+      var title=h?h.textContent.replace(/\s+/g,' ').trim():('Slide '+(i+1));
+      var c=document.createElement('div'); c.className='ovcard';
+      c.innerHTML='<div class="ovn">'+pad(i+1)+' &middot; '+s.getAttribute('data-sec')+'</div><div class="ovt">'+title+'</div>';
+      c.addEventListener('click',function(){ go(i); hideOv(); });
+      ovgrid.appendChild(c);
+    });
+  }
+  buildOverview();
   function showOv(){
     ov.classList.add('show');
     Array.prototype.forEach.call(ovgrid.children,function(c,idx){ c.classList.toggle('cur',idx===cur); });
@@ -2039,6 +2116,38 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var chip=el('pz-chip');
     if(PZ.name){ el('pz-chip-t').textContent='Prepared for '+PZ.name; chip.style.display='inline-flex'; }
     else { chip.style.display='none'; }
+    // manager slide (optional) — sits right after Peter Schwartz
+    (function(){
+      var mgrEl=el('slide-manager');
+      if(!mgrEl) return;
+      var show = PZ.mgrOn && PZ.mgrName;
+      if(show){
+        var mn=PZ.mgrName;
+        el('mgr-name').textContent=mn;
+        var initials=mn.split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0,2).toUpperCase()||'M';
+        el('mgr-initials').textContent=initials;
+        var mt=PZ.mgrTitle||'Manager';
+        el('mgr-title').textContent=mt;
+        el('mgr-tag-role').textContent=mt;
+        el('mgr-tag-loc').textContent='On your side';
+        var img=el('mgr-img');
+        if(PZ.mgrPhoto){ img.src=PZ.mgrPhoto; img.style.display=''; }
+        else { img.src=''; img.style.display='none'; }
+        // bio: split into paragraphs on blank lines / single newlines
+        var wrap=el('mgr-bio-wrap'); wrap.innerHTML='';
+        var bio=(PZ.mgrBio||'').trim();
+        if(bio){
+          var paras=bio.split(/\n\s*\n|\n/).filter(function(x){ return x.trim(); });
+          paras.forEach(function(pt){ var p=document.createElement('p'); p.textContent=pt.trim(); wrap.appendChild(p); });
+        } else {
+          var p=document.createElement('p'); p.textContent=mn+' will be right there with you \u2014 a manager invested in your success.'; wrap.appendChild(p);
+        }
+        mgrEl.style.display='';
+      } else {
+        mgrEl.style.display='none';
+      }
+      rebuildSlides();
+    })();
     // cover — personalized: the candidate's name IS the headline, "your career matters" becomes the tagline
     var esc0=function(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
     if(PZ.name){
@@ -2108,13 +2217,26 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var bps=parseInt(el('su-bps').value,10); if(isNaN(bps)||bps<=0) bps=0;
     var pmBps=parseInt(el('su-pmbps').value,10); if(isNaN(pmBps)||pmBps<=0) pmBps=155;
     var margin=parseInt(el('su-margin').value,10); if(isNaN(margin)||margin<=0) margin=275;
-    return { name:name, firstName:name?name.split(/\s+/)[0]:'', company:company, volume:volume, units:units, bps:bps, pmBps:pmBps, margin:margin };
+    var mgrOn=el('su-mgr-on').checked;
+    var mgrName=el('su-mgr-name').value.trim();
+    var mgrTitle=el('su-mgr-title').value.trim();
+    var mgrBio=el('su-mgr-bio').value.trim();
+    return { name:name, firstName:name?name.split(/\s+/)[0]:'', company:company, volume:volume, units:units, bps:bps, pmBps:pmBps, margin:margin,
+      mgrOn:mgrOn, mgrName:mgrName, mgrTitle:mgrTitle, mgrBio:mgrBio, mgrPhoto:mgrPhoto };
   }
+  var mgrPhoto='';
   function fillSetup(d){
     el('su-name').value=d.name||''; el('su-company').value=d.company||'';
     el('su-volume').value=d.volume>0?fmtInt(d.volume):'';
     el('su-units').value=d.units>0?d.units:''; el('su-bps').value=d.bps>0?d.bps:'';
     el('su-pmbps').value=(d.pmBps>0?d.pmBps:155); el('su-margin').value=(d.margin>0?d.margin:275);
+    el('su-mgr-on').checked=!!d.mgrOn;
+    el('su-mgr-name').value=d.mgrName||''; el('su-mgr-title').value=d.mgrTitle||''; el('su-mgr-bio').value=d.mgrBio||'';
+    mgrPhoto=d.mgrPhoto||'';
+    el('su-mgr-fields').style.display=d.mgrOn?'grid':'none';
+    var pv=el('su-mgr-preview'), lb=el('su-mgr-label'), cl=el('su-mgr-clear');
+    if(mgrPhoto){ pv.src=mgrPhoto; pv.style.display='block'; lb.style.display='none'; cl.style.display='inline-block'; }
+    else { pv.src=''; pv.style.display='none'; lb.style.display='block'; cl.style.display='none'; }
   }
 
   var setup=el('setup'), started=false;
@@ -2124,7 +2246,39 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   function launch(){
     setup.classList.remove('show');
     if(!started){ started=true; go(0); }
+    else {
+      // an edit may have added/removed the manager slide — re-sync position + chrome
+      if(cur>total-1) cur=total-1;
+      var s=slides[cur];
+      slides.forEach(function(x){ x.classList.remove('active','leaving','anim'); x.style.animation=''; });
+      s.classList.add('active');
+      countEl.textContent=pad(cur+1)+' / '+pad(total);
+      bar.style.width=(total>1?(cur/(total-1)*100):0)+'%';
+      prevBtn.disabled=(cur===0); nextBtn.disabled=(cur===total-1);
+      onActivate(cur);
+    }
   }
+  /* ---- manager slide intake controls ---- */
+  el('su-mgr-on').addEventListener('change',function(){
+    el('su-mgr-fields').style.display=this.checked?'grid':'none';
+  });
+  el('su-mgr-drop').addEventListener('click',function(){ el('su-mgr-photo').click(); });
+  el('su-mgr-photo').addEventListener('change',function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f) return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      mgrPhoto=rd.result;
+      var pv=el('su-mgr-preview'); pv.src=mgrPhoto; pv.style.display='block';
+      el('su-mgr-label').style.display='none'; el('su-mgr-clear').style.display='inline-block';
+    };
+    rd.readAsDataURL(f);
+  });
+  el('su-mgr-clear').addEventListener('click',function(){
+    mgrPhoto=''; el('su-mgr-photo').value='';
+    el('su-mgr-preview').src=''; el('su-mgr-preview').style.display='none';
+    el('su-mgr-label').style.display='block'; el('su-mgr-clear').style.display='none';
+  });
+
   el('su-begin').addEventListener('click',function(){ personalize(readSetup()); launch(); });
   el('su-skip').addEventListener('click',function(){ if(!PZ.name&&!PZ.volume) personalize({}); launch(); });
   setup.addEventListener('keydown',function(e){ if(e.key==='Enter' && e.target.tagName==='INPUT'){ e.preventDefault(); personalize(readSetup()); launch(); } });
