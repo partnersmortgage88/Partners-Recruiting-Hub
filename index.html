@@ -1158,6 +1158,31 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 .ds-card{border-radius:24px;box-shadow:0 50px 120px -40px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.05);animation:suIn .5s var(--eo) both}
 .ds-card .pmh{font-size:1.9rem}
 @media(prefers-reduced-motion:reduce){.ds-card{opacity:1!important;transform:none!important;filter:none!important}}
+
+
+/* ===== v5: optional Leaving Money section ===== */
+.builder .cmp-block{padding:0;overflow:hidden;transition:border-color .35s,box-shadow .35s}
+.builder .cmp-block.open{border-color:var(--teal-soft)}
+.builder .cmp-switch{display:flex;align-items:center;gap:18px;padding:19px 22px;cursor:pointer;user-select:none;-webkit-user-select:none;margin:0;-webkit-tap-highlight-color:transparent}
+.builder .cmp-txt{flex:1;min-width:0}
+.builder .cmp-t{font-weight:600;font-size:1rem;color:var(--ink);letter-spacing:-.01em}
+.builder .cmp-d{font-size:.85rem;line-height:1.45;color:var(--muted);margin-top:3px;font-weight:400}
+.builder .tgl{position:relative;flex:none;display:inline-flex;width:50px;height:29px;border-radius:999px;background:var(--line-strong);box-shadow:inset 0 1px 3px rgba(15,20,22,.14);transition:background .3s var(--eo),box-shadow .3s;cursor:pointer}
+.builder .tgl input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;padding:0;border:none;cursor:pointer}
+.builder .tgl .knob{position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(15,20,22,.3),0 3px 8px rgba(15,20,22,.18);transition:transform .4s var(--es),width .2s var(--eo);pointer-events:none}
+.builder .tgl:active .knob{width:27px}
+.builder .tgl.on{background:var(--teal);box-shadow:inset 0 1px 3px rgba(0,0,0,.2),0 0 0 5px var(--teal-tint)}
+.builder .tgl.on .knob{transform:translateX(21px)}
+.builder .tgl.on:active .knob{transform:translateX(17px)}
+.cmp-reveal{display:grid;grid-template-rows:1fr;transition:grid-template-rows .55s var(--eo)}
+.cmp-block:not(.open) .cmp-reveal{grid-template-rows:0fr}
+.cmp-reveal>div{overflow:hidden;min-height:0}
+.builder .cmp-fields{padding:2px 22px 22px;transition:opacity .4s var(--eo) .1s,transform .4s var(--eo) .1s}
+.cmp-block:not(.open) .cmp-fields{opacity:0;transform:translateY(-6px)}
+@media(prefers-reduced-motion:reduce){
+  .cmp-reveal{transition:none}
+  .builder .cmp-fields{transition:none;opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
@@ -1887,17 +1912,28 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     </div>
 
     <div class="step" data-s="2">
-      <div class="grp">
-        <div class="gh">Their production (powers the Leaving Money tool)</div>
-        <div class="r3">
-          <div><label for="of-volume">Last 12 months volume</label><div class="ipd"><span class="pre">$</span><input type="text" id="of-volume" class="mono" inputmode="numeric" placeholder="36,000,000"></div></div>
-          <div><label for="of-units">Units / mo</label><input type="number" id="of-units" class="mono" placeholder="8"></div>
-          <div><label for="of-bps">Current bps</label><input type="number" id="of-bps" class="mono" placeholder="125"></div>
-        </div>
-        <div class="r2" style="margin-top:14px">
-          <div><label for="of-pmbps">Their bps at Partners</label><input type="number" id="of-pmbps" class="mono" value="155"></div>
-          <div><label for="of-margin">Rate sheet / branch margin (bps)</label><input type="number" id="of-margin" class="mono" value="275"></div>
-        </div>
+      <div class="grp cmp-block open" id="of-comp-block">
+        <label class="cmp-switch" for="of-comp-on">
+          <div class="cmp-txt">
+            <div class="cmp-t">Include the &ldquo;Leaving money?&rdquo; section</div>
+            <div class="cmp-d">The live side-by-side of their comp today versus Partners. Flip it off when this offer doesn&rsquo;t need the numbers pitch.</div>
+          </div>
+          <span class="tgl" id="of-comp-tgl"><input type="checkbox" id="of-comp-on" checked><span class="knob"></span></span>
+        </label>
+        <div class="cmp-reveal"><div>
+          <div class="cmp-fields">
+            <div class="gh">Their production (powers the Leaving Money tool)</div>
+            <div class="r3">
+              <div><label for="of-volume">Last 12 months volume</label><div class="ipd"><span class="pre">$</span><input type="text" id="of-volume" class="mono" inputmode="numeric" placeholder="36,000,000"></div></div>
+              <div><label for="of-units">Units / mo</label><input type="number" id="of-units" class="mono" placeholder="8"></div>
+              <div><label for="of-bps">Current bps</label><input type="number" id="of-bps" class="mono" placeholder="125"></div>
+            </div>
+            <div class="r2" style="margin-top:14px">
+              <div><label for="of-pmbps">Their bps at Partners</label><input type="number" id="of-pmbps" class="mono" value="155"></div>
+              <div><label for="of-margin">Rate sheet / branch margin (bps)</label><input type="number" id="of-margin" class="mono" value="275"></div>
+            </div>
+          </div>
+        </div></div>
       </div>
     </div>
 
@@ -3036,7 +3072,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   /* =================== BUILDER WIZARD =================== */
   var WZ_TITLES={
     1:['Who are we <em>hiring?</em>','A few quick steps and you\u2019ll have a private offer page ready to send.'],
-    2:['What do their <em>numbers</em> look like?','This powers the live Leaving Money comparison on their page. Rate sheet starts at 275.'],
+    2:['What do their <em>numbers</em> look like?','This powers the live Leaving Money comparison on their page \u2014 or flip the switch off if this offer doesn\u2019t need the numbers pitch.'],
     3:['Add your <em>video</em> and the letter.','A 60-second personal video is the single highest-converting thing on the page. Both are optional.'],
     4:['Say it in <em>your</em> words.','A short note from you, plus the signature pad so they can accept on the spot.'],
     5:['Who is it <em>from?</em>','Shown on the page, the call button, and the signed letter delivery.'],
@@ -3132,6 +3168,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   function resetOffer(){
     ['of-name','of-company','of-role','of-volume','of-units','of-bps','of-headline','of-note','of-video-url','of-signurl'].forEach(function(id){ var e=el(id); if(e) e.value=''; });
     el('of-pmbps').value='155'; el('of-margin').value='275';
+    var cOn=el('of-comp-on'); if(cOn) cOn.checked=true; compSync();
     if(typeof VIDEO==='object'&&VIDEO){ VIDEO.src=''; VIDEO.name=''; VIDEO.isAudio=false; }
     if(typeof PDF==='object'&&PDF){ PDF.src=''; PDF.name=''; }
     var vl=el('of-video-label'); if(vl) vl.textContent='Click to add a video (or audio) message';
@@ -3181,7 +3218,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   /* ---- live rail ---- */
   var WZ_TIPS={
     1:'<b>Tip:</b> Use the name they actually go by \u2014 the whole offer page speaks to them by first name.',
-    2:'<b>Tip:</b> Their last 12 months of volume powers a live side-by-side of what they left on the table. Rate sheet starts at 275.',
+    2:'<b>Tip:</b> Their last 12 months of volume powers a live side-by-side of what they left on the table. Not every offer needs it \u2014 the switch removes the whole section from their page.',
     3:'<b>Tip:</b> A 60-second phone video from you converts better than anything else on the page. Vertical is fine.',
     4:'<b>Tip:</b> With e-signature on, they can accept the Letter of Intent right on the page \u2014 no printing, no scanning.',
     5:'<b>Tip:</b> Your name and number become the \u201CCall\u201D button on their page. Double-check the phone format.',
@@ -3192,9 +3229,15 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var set=function(id,val,fallback){ var e=el(id); if(!e) return; if(val){ e.textContent=val; e.classList.remove('off'); } else { e.textContent=fallback||'\u2014'; e.classList.add('off'); } };
     set('rl-name', v('of-name'));
     set('rl-co', v('of-company'));
-    var vol=v('of-volume'); set('rl-vol', vol? ('$'+vol):'' );
-    var b1=v('of-bps'), b2=v('of-pmbps');
-    set('rl-bps', (b1||b2)? ((b1||'?')+' \u2192 '+(b2||'?')):'' );
+    var cEl=el('of-comp-on'), cOn=!cEl||cEl.checked;
+    if(cOn){
+      var vol=v('of-volume'); set('rl-vol', vol? ('$'+vol):'' );
+      var b1=v('of-bps'), b2=v('of-pmbps');
+      set('rl-bps', (b1||b2)? ((b1||'?')+' \u2192 '+(b2||'?')):'' );
+    } else {
+      set('rl-vol','', 'Off');
+      set('rl-bps','', 'Off');
+    }
     var vid=el('rl-video'), hasV=(typeof VIDEO==='object'&&VIDEO&&VIDEO.src);
     if(hasV||v('of-video-url')){ vid.textContent='Added \u2713'; vid.className='ok'; } else { vid.textContent='Not added'; vid.className='off'; }
     var pd=el('rl-pdf'), hasP=(typeof PDF==='object'&&PDF&&PDF.src);
@@ -3441,6 +3484,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 
   function rawIntL(v){ return parseInt(String(v).replace(/[^0-9]/g,''),10)||0; }
   el('of-volume').addEventListener('input',function(){ var n=rawIntL(this.value); this.value=n?n.toLocaleString('en-US'):''; });
+  function compSync(){
+    var c=el('of-comp-on'); if(!c) return;
+    var on=c.checked;
+    var t=el('of-comp-tgl'); if(t) t.classList.toggle('on',on);
+    var b=el('of-comp-block'); if(b) b.classList.toggle('open',on);
+  }
+  if(el('of-comp-on')){ el('of-comp-on').addEventListener('change',compSync); }
+  compSync();
 
   function offerData(){
     var name=el('of-name').value.trim();
@@ -3453,6 +3504,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       bps:rawIntL(el('of-bps').value),
       pmBps:rawIntL(el('of-pmbps').value)||155,
       margin:rawIntL(el('of-margin').value)||275,
+      compOn: el('of-comp-on') ? el('of-comp-on').checked : true,
       headline:el('of-headline').value.trim(),
       note:el('of-note').value.trim(),
       senderName:el('of-sname').value.trim(), senderTitle:el('of-stitle').value.trim(),
@@ -3471,6 +3523,32 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var hero = d.headline ? esc(d.headline) : (fn? (fn+', let\u2019s build something <em>together.</em>') : 'Let\u2019s build something <em>together.</em>');
     var monthly = d.volume>0 ? Math.round(d.volume/12) : 3000000;
     var lmbBps = d.bps>0 ? d.bps : 125;
+    var compOn = d.compOn!==false;
+    var lmSection = !compOn ? '' : (''
++'<section class="mod white reveal">'
++'<div class="eyebrow">The real numbers</div>'
++'<h2 class="h2">'+(fn? (fn+', here\u2019s what changes.') : 'Here\u2019s what changes.')+'</h2>'
++'<p class="cintro">'+(d.volume>0? ('Your $'+ (d.volume).toLocaleString('en-US') +' of funded volume over the last 12 months'+(co?(' at '+co):'')+', side by side, today versus Partners. The fields are live, so play with them.') : 'Your production, side by side, today versus Partners. The fields are live, so play with them.')+'</p>'
++'<div class="inputs">'
++'<div class="fld"><label>Monthly volume</label><div class="mw"><span class="pre">$</span><input class="vol" id="ov" type="text" inputmode="numeric" value="'+monthly.toLocaleString('en-US')+'" oninput="ofmt(this,1)"></div></div>'
++'<div class="swap">&#8644;</div>'
++'<div class="fld"><label>Annual volume</label><div class="mw"><span class="pre">$</span><input class="vol" id="oy" type="text" inputmode="numeric" value="'+(monthly*12).toLocaleString('en-US')+'" oninput="ofmt(this,0)"></div></div>'
++'</div>'
++'<div class="cols">'
++'<div class="col lmb"><div class="ch">'+(co?'Where you are now':'Legacy Mortgage Bank')+'</div><div class="cn">'+(co||'The Traditional Model')+'</div>'
++'<div class="row"><span class="rk">Company margin (avg)</span><span class="rv">375 bps</span></div>'
++'<div class="row"><span class="rk">Your comp (bps)</span><input class="bps" id="olb" type="number" value="'+lmbBps+'" min="50" max="375" step="5" oninput="ocalc()"></div>'
++'<div class="sw"><div class="st"><span>You keep <span id="ols">0%</span></span><span>House <span id="olh">0%</span></span></div><div class="tr"><div class="barf" id="olbar"></div></div></div>'
++'<div class="bn"><div class="b"><div class="bl">Monthly</div><div class="bv" id="olm">$0</div></div><div class="b"><div class="bl">Annual</div><div class="bv" id="oly">$0</div></div></div></div>'
++'<div class="col pm"><div class="ch">Partners Mortgage</div><div class="cn">Modern Mortgage Bank</div>'
++'<div class="row"><span class="rk">Branch margin (avg)</span><span class="rv">'+d.margin+' bps</span></div>'
++'<div class="row"><span class="rk">Your comp (bps)</span><input class="bps" id="opb" type="number" value="'+d.pmBps+'" min="50" max="'+d.margin+'" step="5" oninput="ocalc()"></div>'
++'<div class="sw"><div class="st"><span class="you">You keep <span id="ops">0%</span></span><span class="ho">+ everything included</span></div><div class="tr"><div class="barf" id="opbar"></div></div></div>'
++'<div class="bn"><div class="b"><div class="bl">Monthly</div><div class="bv" id="opm">$0</div></div><div class="b"><div class="bl">Annual</div><div class="bv" id="opy">$0</div></div></div></div>'
++'</div>'
++'<div class="delta"><div class="bgn" id="odp">+0%<small>more earnings</small></div><div class="dm" id="odm"></div></div>'
++'<p style="font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:12px">* Illustration based on the figures above. Partners comp varies by branch.</p>'
++'</section>');
     var sub = 'An offer prepared exclusively for '+(nm||'you')+(co?(' \u00B7 currently at '+co):'')+(d.role?('. For a '+esc(d.role)+' ready for more'):'')+'.';
 
     var videoSection='';
@@ -3698,30 +3776,7 @@ else{dl(bytes,fn);mailPeter(name);st('Your signed letter downloaded and an email
 +'<section class="mod ink hero"><div class="glow"></div><div class="eyebrow gold">Your offer from Partners Mortgage</div><h1 class="hh">'+hero+'</h1><p class="sub">'+sub+'</p></section>'
 +noteSection
 +videoSection
-+'<section class="mod white reveal">'
-+'<div class="eyebrow">The real numbers</div>'
-+'<h2 class="h2">'+(fn? (fn+', here\u2019s what changes.') : 'Here\u2019s what changes.')+'</h2>'
-+'<p class="cintro">'+(d.volume>0? ('Your $'+ (d.volume).toLocaleString('en-US') +' of funded volume over the last 12 months'+(co?(' at '+co):'')+', side by side, today versus Partners. The fields are live, so play with them.') : 'Your production, side by side, today versus Partners. The fields are live, so play with them.')+'</p>'
-+'<div class="inputs">'
-+'<div class="fld"><label>Monthly volume</label><div class="mw"><span class="pre">$</span><input class="vol" id="ov" type="text" inputmode="numeric" value="'+monthly.toLocaleString('en-US')+'" oninput="ofmt(this,1)"></div></div>'
-+'<div class="swap">&#8644;</div>'
-+'<div class="fld"><label>Annual volume</label><div class="mw"><span class="pre">$</span><input class="vol" id="oy" type="text" inputmode="numeric" value="'+(monthly*12).toLocaleString('en-US')+'" oninput="ofmt(this,0)"></div></div>'
-+'</div>'
-+'<div class="cols">'
-+'<div class="col lmb"><div class="ch">'+(co?'Where you are now':'Legacy Mortgage Bank')+'</div><div class="cn">'+(co||'The Traditional Model')+'</div>'
-+'<div class="row"><span class="rk">Company margin (avg)</span><span class="rv">375 bps</span></div>'
-+'<div class="row"><span class="rk">Your comp (bps)</span><input class="bps" id="olb" type="number" value="'+lmbBps+'" min="50" max="375" step="5" oninput="ocalc()"></div>'
-+'<div class="sw"><div class="st"><span>You keep <span id="ols">0%</span></span><span>House <span id="olh">0%</span></span></div><div class="tr"><div class="barf" id="olbar"></div></div></div>'
-+'<div class="bn"><div class="b"><div class="bl">Monthly</div><div class="bv" id="olm">$0</div></div><div class="b"><div class="bl">Annual</div><div class="bv" id="oly">$0</div></div></div></div>'
-+'<div class="col pm"><div class="ch">Partners Mortgage</div><div class="cn">Modern Mortgage Bank</div>'
-+'<div class="row"><span class="rk">Branch margin (avg)</span><span class="rv">'+d.margin+' bps</span></div>'
-+'<div class="row"><span class="rk">Your comp (bps)</span><input class="bps" id="opb" type="number" value="'+d.pmBps+'" min="50" max="'+d.margin+'" step="5" oninput="ocalc()"></div>'
-+'<div class="sw"><div class="st"><span class="you">You keep <span id="ops">0%</span></span><span class="ho">+ everything included</span></div><div class="tr"><div class="barf" id="opbar"></div></div></div>'
-+'<div class="bn"><div class="b"><div class="bl">Monthly</div><div class="bv" id="opm">$0</div></div><div class="b"><div class="bl">Annual</div><div class="bv" id="opy">$0</div></div></div></div>'
-+'</div>'
-+'<div class="delta"><div class="bgn" id="odp">+0%<small>more earnings</small></div><div class="dm" id="odm"></div></div>'
-+'<p style="font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:12px">* Illustration based on the figures above. Partners comp varies by branch.</p>'
-+'</section>'
++lmSection
 +SIGN_MODULE
 +'</main>'
 +'<aside class="aside"><div class="arail">'
@@ -3740,7 +3795,7 @@ else{dl(bytes,fn);mailPeter(name);st('Your signed letter downloaded and an email
 +'function sf(id,n){var e=document.getElementById(id);if(e)e.value=Math.round(n).toLocaleString(\'en-US\');}'
 +'window.ofmt=function(el,m){var n=parseInt(el.value.replace(/[^0-9]/g,\'\'),10)||0;el.value=n.toLocaleString(\'en-US\');if(m)sf(\'oy\',n*12);else sf(\'ov\',Math.round(n/12));ocalc();};'
 +'var MARG='+d.margin+';var CO='+coJS+';'
-+'window.ocalc=function(){var v=gr(\'ov\');var lb=parseFloat(document.getElementById(\'olb\').value)||0;var pb=parseFloat(document.getElementById(\'opb\').value)||0;'
++'window.ocalc=function(){if(!document.getElementById(\'olb\'))return;var v=gr(\'ov\');var lb=parseFloat(document.getElementById(\'olb\').value)||0;var pb=parseFloat(document.getElementById(\'opb\').value)||0;'
 +'var lm=v*(lb/10000),pm=v*(pb/10000);var ls=lb>0?Math.round(lb/375*100):0;var ps=pb>0?Math.round(pb/MARG*100):0;'
 +'document.getElementById(\'olm\').textContent=f(lm);document.getElementById(\'oly\').textContent=f(lm*12);document.getElementById(\'ols\').textContent=ls+\'%\';document.getElementById(\'olh\').textContent=(100-ls)+\'%\';document.getElementById(\'olbar\').style.width=Math.min(ls,100)+\'%\';'
 +'document.getElementById(\'opm\').textContent=f(pm);document.getElementById(\'opy\').textContent=f(pm*12);document.getElementById(\'ops\').textContent=ps+\'%\';document.getElementById(\'opbar\').style.width=Math.min(ps,100)+\'%\';'
