@@ -1188,6 +1188,16 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 /* ===== v6: LOI validity clause ===== */
 .lexp{font-size:.85rem;color:var(--ink-2);line-height:1.65;margin-bottom:18px;padding:12px 16px;border-left:3px solid var(--gold-brand);background:#FFFBF2;border-radius:0 10px 10px 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .lexp b{color:var(--ink);font-weight:700}
+
+
+/* ===== v7: Leaving Money slide toggle ===== */
+.setup .lmrow{display:flex;align-items:center;gap:18px;margin-top:16px;padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);transition:border-color .3s}
+.setup .lmrow:hover{border-color:var(--line-strong)}
+.setup .lm-txt{flex:1;min-width:0}
+.setup .lm-t{font-weight:600;font-size:.95rem;color:var(--ink);letter-spacing:-.01em}
+.setup .lm-d{font-size:.82rem;line-height:1.45;color:var(--muted);margin-top:2px}
+.setup .lmdep{transition:opacity .35s var(--eo)}
+.setup.lmoff .lmdep{opacity:.4;pointer-events:none}
 </style>
 </head>
 <body>
@@ -1558,7 +1568,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 </section>
 
 <!-- 16 CALCULATOR -->
-<section class="slide bg-light" data-sec="Leaving Money?">
+<section class="slide bg-light" data-sec="Leaving Money?" id="slide-money">
   <div class="wrap">
     <span class="eyebrow" data-reveal>The Real Numbers</span>
     <h2 class="head" id="calc-head" style="margin-bottom:6px" data-reveal>Are you leaving money <em>on the table?</em></h2>
@@ -2143,7 +2153,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
               <input type="text" id="su-company" placeholder="e.g. Summit Home Loans" autocomplete="off">
             </div>
           </div>
-          <div class="row3">
+          <div class="row3 lmdep">
             <div>
               <label for="su-volume">Last 12 months volume</label>
               <div class="ip"><span class="pre">$</span><input type="text" id="su-volume" class="mono pad" inputmode="numeric" placeholder="36,000,000"></div>
@@ -2160,7 +2170,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
         </div>
         <div class="sgrp">
           <div class="su-div">Their offer at Partners</div>
-          <div class="row2">
+          <div class="row2 lmdep">
             <div>
               <label for="su-pmbps">Your bps at Partners</label>
               <input type="number" id="su-pmbps" class="mono" inputmode="numeric" value="155">
@@ -2169,6 +2179,13 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
               <label for="su-margin">Branch margin (bps)</label>
               <input type="number" id="su-margin" class="mono" inputmode="numeric" value="275">
             </div>
+          </div>
+          <div class="lmrow">
+            <div class="lm-txt">
+              <div class="lm-t">Include the Leaving Money slide</div>
+              <div class="lm-d">The live comp calculator. Flip it off when the numbers pitch isn&rsquo;t part of this conversation.</div>
+            </div>
+            <span class="tgl on" id="su-lm-tgl"><input type="checkbox" id="su-lm-on" checked><span class="knob"></span></span>
           </div>
         </div>
 
@@ -2624,7 +2641,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 
   /* ---------- personalization / intake ---------- */
   var PZ={};
-  function el(id){ return document.getElementById(id); }
+  var __stub={};
+  function el(id){
+    var n=document.getElementById(id);
+    if(n) return n;
+    if(!SHARED) return null;
+    if(!__stub[id]) __stub[id]=document.createElement('div');
+    return __stub[id];
+  }
   function fmtInt(n){ return Math.round(n).toLocaleString('en-US'); }
   function rawInt(v){ return parseInt(String(v).replace(/[^0-9]/g,''),10)||0; }
 
@@ -2637,6 +2661,11 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var chip=el('pz-chip');
     if(PZ.name){ el('pz-chip-t').textContent='Prepared for '+PZ.name; chip.style.display='inline-flex'; }
     else { chip.style.display='none'; }
+    // Leaving Money slide (optional)
+    (function(){
+      var s=el('slide-money');
+      if(s && s.style) s.style.display=(PZ.lmOn===false)?'none':'';
+    })();
     // manager slide (optional) — sits right after Peter Schwartz
     (function(){
       var mgrEl=el('slide-manager');
@@ -2743,6 +2772,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var mgrTitle=el('su-mgr-title').value.trim();
     var mgrBio=el('su-mgr-bio').value.trim();
     return { name:name, firstName:name?name.split(/\s+/)[0]:'', company:company, volume:volume, units:units, bps:bps, pmBps:pmBps, margin:margin,
+      lmOn:(!el('su-lm-on')||el('su-lm-on').checked),
       mgrOn:mgrOn, mgrName:mgrName, mgrTitle:mgrTitle, mgrBio:mgrBio, mgrPhoto:mgrPhoto };
   }
   var mgrPhoto='';
@@ -2752,9 +2782,11 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     el('su-units').value=d.units>0?d.units:''; el('su-bps').value=d.bps>0?d.bps:'';
     el('su-pmbps').value=(d.pmBps>0?d.pmBps:155); el('su-margin').value=(d.margin>0?d.margin:275);
     el('su-mgr-on').checked=!!d.mgrOn;
+    var lmc=el('su-lm-on'); if(lmc) lmc.checked=(d.lmOn!==false);
     el('su-mgr-name').value=d.mgrName||''; el('su-mgr-title').value=d.mgrTitle||''; el('su-mgr-bio').value=d.mgrBio||'';
     mgrPhoto=d.mgrPhoto||'';
     mgrSync();
+    lmSync();
     var pv=el('su-mgr-preview'), lb=el('su-mgr-label'), cl=el('su-mgr-clear');
     if(mgrPhoto){ pv.src=mgrPhoto; pv.style.display='block'; lb.style.display='none'; cl.style.display='inline-block'; }
     else { pv.src=''; pv.style.display='none'; lb.style.display='block'; cl.style.display='none'; }
@@ -2822,6 +2854,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   }
   el('su-mgr-on').addEventListener('change',mgrSync);
   mgrSync();
+  function lmSync(){
+    var c=el('su-lm-on'); if(!c) return;
+    var on=c.checked;
+    var t=el('su-lm-tgl'); if(t) t.classList.toggle('on',on);
+    if(setup && setup.classList) setup.classList.toggle('lmoff',!on);
+  }
+  el('su-lm-on').addEventListener('change',lmSync);
+  lmSync();
   el('su-mgr-drop').addEventListener('click',function(){ el('su-mgr-photo').click(); });
   el('su-mgr-photo').addEventListener('change',function(e){
     var f=e.target.files&&e.target.files[0]; if(!f) return;
@@ -2943,7 +2983,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       var sh=doc.querySelectorAll('.show'); for(var i=0;i<sh.length;i++){ sh[i].classList.remove('show'); }
       var ac=doc.querySelectorAll('.slide.active,.slide.leaving,.slide.anim'); for(var j=0;j<ac.length;j++){ ac[j].classList.remove('active','leaving','anim'); ac[j].style.animation=''; }
       // viewer-only: strip builder chrome from the shared copy
-      var strip=doc.querySelectorAll('#savebtn,#homebtn,#editbtn'); for(var k=0;k<strip.length;k++){ strip[k].parentNode.removeChild(strip[k]); }
+      var strip=doc.querySelectorAll('#savebtn,#homebtn,#editbtn,#mode,#loi,#builder,#deckhome,#decklib,#setup,#decksave,#pubmodal,#preview'); for(var k=0;k<strip.length;k++){ strip[k].parentNode.removeChild(strip[k]); }
       var hint=doc.querySelector('#hint');
       if(hint) hint.innerHTML='<span class="k">\u2190</span><span class="k">\u2192</span> navigate \u00B7 <span class="k">G</span> all slides \u00B7 <span class="k">F</span> fullscreen';
     }catch(e){}
