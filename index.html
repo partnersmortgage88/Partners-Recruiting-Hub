@@ -1198,6 +1198,179 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 .setup .lm-d{font-size:.82rem;line-height:1.45;color:var(--muted);margin-top:2px}
 .setup .lmdep{transition:opacity .35s var(--eo)}
 .setup.lmoff .lmdep{opacity:.4;pointer-events:none}
+
+
+/* ===== v8: proportional stage zoom for any display size ===== */
+.slide>.wrap{zoom:var(--deckzoom,1)}
+@media(min-width:1900px){
+  .arrow{width:58px;height:58px;font-size:1.65rem}
+  .hint{font-size:.72rem;padding:9px 18px}
+  .chrome{padding:0 26px}
+}
+
+
+/* ===== v9: dual-deck toggle + PIN + onboarding deck components ===== */
+.deckswitch{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface);margin-right:12px;flex:none}
+.dsb{border:none;background:transparent;font-family:var(--mono);font-weight:500;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 13px;border-radius:999px;cursor:pointer;transition:all .3s var(--eo);white-space:nowrap}
+.dsb:hover{color:var(--ink)}
+.dsb.on{background:var(--ink);color:#fff;box-shadow:0 2px 8px -3px rgba(15,20,22,.5)}
+.dsb:focus-visible{outline:2px solid var(--gold-brand);outline-offset:2px}
+@media(max-width:1180px){.dsb{padding:6px 9px;font-size:.58rem;letter-spacing:.06em}}
+@media(max-width:560px){.deckswitch{margin-right:8px}.dsb{padding:5px 8px}}
+
+.pinmodal{position:fixed;inset:0;z-index:119;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(6,14,16,.72);backdrop-filter:blur(9px)}
+.pinmodal.show{display:flex;animation:fadeIn .25s var(--eo)}
+.pin-card{position:relative;width:100%;max-width:460px;background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:34px 36px 30px;box-shadow:0 50px 120px -40px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.05);animation:suIn .45s var(--eo) both}
+.pin-card .eyebrow{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.pin-card h2{font-family:var(--serif);font-weight:400;font-size:1.8rem;color:var(--ink);line-height:1.05;margin-bottom:8px}
+.pin-card h2 em{font-style:italic;color:var(--teal)}
+.pin-sub{font-size:.9rem;line-height:1.55;color:var(--muted);margin-bottom:18px}
+.pin-row{display:flex;gap:10px}
+.pin-row input{flex:1;min-width:0;font-family:var(--mono);font-size:1.3rem;letter-spacing:.35em;text-align:center;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:14px;background:var(--surface);color:var(--ink);transition:border-color .25s,box-shadow .25s}
+.pin-row input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.pin-go{flex:none;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:none;border-radius:999px;padding:12px 22px;font-family:var(--sans);font-weight:600;font-size:.95rem;cursor:pointer;transition:transform .2s var(--eo),box-shadow .25s;box-shadow:0 12px 26px -12px rgba(15,20,22,.5)}
+.pin-go:hover{transform:translateY(-1px)}
+.pin-go:active{transform:scale(.96)}
+.pin-err{min-height:20px;margin-top:12px;font-size:.84rem;font-weight:600;color:#B23B3B}
+.pin-x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:1.1rem;line-height:1;cursor:pointer;transition:.2s}
+.pin-x:hover{border-color:var(--line-strong);color:var(--ink)}
+@keyframes pinShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.pin-card.shake{animation:pinShake .45s var(--eo)}
+
+.rj-sub{font-size:1rem;line-height:1.6;color:var(--muted);max-width:70ch;margin:-6px 0 22px}
+.bg-ink .rj-sub,.bg-teal .rj-sub{color:rgba(255,255,255,.72)}
+.rj-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
+.bg-ink .rj-k,.bg-teal .rj-k{color:var(--gold-soft)}
+.rj-k em{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:1.1em}
+.rj-grid{display:grid;gap:14px;margin-top:6px}
+.rj-grid.two{grid-template-columns:1fr 1fr}
+.rj-grid.three{grid-template-columns:repeat(3,1fr)}
+.rj-grid.four{grid-template-columns:repeat(4,1fr)}
+.rj-grid+.rj-grid{margin-top:14px}
+.rj-card{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:18px 19px;transition:transform .3s var(--eo),border-color .3s,box-shadow .3s}
+.rj-card:hover{transform:translateY(-2px);border-color:var(--teal-soft);box-shadow:var(--shadow-md)}
+.bg-ink .rj-card,.bg-teal .rj-card{background:linear-gradient(165deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border-color:rgba(255,255,255,.14);backdrop-filter:blur(8px)}
+.bg-ink .rj-card:hover,.bg-teal .rj-card:hover{border-color:rgba(255,255,255,.3);box-shadow:0 22px 50px -26px rgba(0,0,0,.55)}
+.rj-card p{font-size:.88rem;line-height:1.55;color:var(--ink-2)}
+.rj-card p+p{margin-top:8px}
+.bg-ink .rj-card p,.bg-teal .rj-card p{color:rgba(255,255,255,.78)}
+.rj-card p b{color:var(--ink)}
+.bg-ink .rj-card p b,.bg-teal .rj-card p b{color:#fff}
+.rj-card.wide{grid-column:1/-1}
+.rj-card.slim{padding:14px 16px}
+.rj-grid.dense .rj-card{padding:14px 15px}
+.rj-grid.dense .rj-card p,.rj-grid.dense .rj-list li{font-size:.8rem;line-height:1.5}
+.rj-list{list-style:none;display:grid;gap:6px}
+.rj-list li{position:relative;padding-left:16px;font-size:.86rem;line-height:1.52;color:var(--ink-2)}
+.rj-list li::before{content:'';position:absolute;left:0;top:.56em;width:6px;height:6px;border-radius:50%;background:var(--teal-soft)}
+.bg-ink .rj-list li,.bg-teal .rj-list li{color:rgba(255,255,255,.78)}
+.bg-ink .rj-list li::before,.bg-teal .rj-list li::before{background:var(--gold-brand);opacity:.7}
+.rj-list li b{color:var(--ink)}
+.bg-ink .rj-list li b,.bg-teal .rj-list li b{color:#fff}
+.rj-vals{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:8px}
+.rj-val{border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:14px;background:var(--surface);padding:16px 15px;transition:transform .3s var(--eo),box-shadow .3s}
+.rj-val:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.rj-val:nth-child(even){border-top-color:var(--gold-brand)}
+.rj-vk{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.rj-val p{font-size:.8rem;line-height:1.5;color:var(--muted)}
+.rj-foot{margin-top:18px;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.rj-org{display:flex;flex-direction:column;align-items:center;margin:10px 0 18px}
+.rj-org-top,.rj-org-node{border:1px solid rgba(255,255,255,.16);border-radius:16px;background:linear-gradient(165deg,rgba(255,255,255,.09),rgba(255,255,255,.03));padding:16px 26px;text-align:center;min-width:250px}
+.rj-org-node.hl{border-color:var(--teal-light);box-shadow:0 0 0 4px rgba(39,176,188,.12),0 18px 40px -22px rgba(0,0,0,.5)}
+.rj-org-name{font-family:var(--serif);font-size:1.25rem;color:#fff}
+.rj-org-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:5px}
+.rj-org-sub em{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;color:var(--gold-soft);font-size:1.2em}
+.rj-org-arms{position:relative;width:340px;height:34px}
+.rj-org-arms i{position:absolute;top:0;left:50%;width:1.5px;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(39,176,188,.7));transform-origin:top center}
+.rj-org-arms i:first-child{transform:rotate(38deg)}
+.rj-org-arms i:last-child{transform:rotate(-38deg)}
+.rj-org-row{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.rj-narrow{max-width:64ch}
+.rj-split{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;margin-top:8px}
+.rj-side{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:20px}
+.rj-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rj-chip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--teal-tint);border:1px solid var(--teal-soft);border-radius:999px;padding:7px 13px}
+.rj-chips.light .rj-chip{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff}
+.rj-note-p{margin-top:14px;font-size:.84rem;line-height:1.55;color:var(--muted)}
+.rj-steps{list-style:none;counter-reset:rjs;display:grid;gap:9px}
+.rj-steps li{counter-increment:rjs;position:relative;padding-left:40px;font-size:.88rem;line-height:1.5;color:var(--ink-2)}
+.rj-steps li b{color:var(--ink)}
+.rj-steps li::before{content:counter(rjs,decimal-leading-zero);position:absolute;left:0;top:.02em;font-family:var(--mono);font-size:.66rem;font-weight:600;color:var(--teal);border:1px solid var(--teal-soft);border-radius:8px;padding:3px 6px;background:var(--teal-tint)}
+.rj-unlock{margin-top:16px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:linear-gradient(120deg,rgba(255,172,39,.16),rgba(255,255,255,.04));padding:16px 18px}
+.rj-uk{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:11px}
+.rj-band{margin-top:16px;border-left:3px solid var(--gold-brand);background:#FFFBF2;border-radius:0 12px 12px 0;padding:13px 16px;font-size:.86rem;line-height:1.55;color:var(--ink-2);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rj-band.alt{border-left-color:var(--teal);background:var(--teal-tint)}
+.rj-band b{color:var(--ink)}
+.rj-lead-chip{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 18px;background:rgba(255,255,255,.06);margin-bottom:16px}
+.rj-lead-chip b{color:#fff}
+.rj-arive{border:1px solid rgba(255,255,255,.16);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.04);margin-top:8px;box-shadow:0 30px 70px -34px rgba(0,0,0,.6)}
+.rj-abar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+.rj-abar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.22)}
+.rj-abar i:first-child{background:rgba(255,120,110,.7)}
+.rj-abar i:nth-child(2){background:rgba(255,190,80,.7)}
+.rj-abar i:nth-child(3){background:rgba(120,220,150,.7)}
+.rj-abar span{margin-left:8px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.rj-abody{display:grid;grid-template-columns:230px 1fr}
+.rj-arail{display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);padding:12px 0}
+.rj-arail span{font-size:.74rem;color:rgba(255,255,255,.68);padding:6px 18px;border-left:2px solid transparent}
+.rj-arail span:first-child{color:#fff;border-left-color:var(--teal-light);background:rgba(39,176,188,.1)}
+.rj-amain{padding:18px 22px}
+.rj-ak{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:12px}
+.rj-arow{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+.rj-arow span{font-size:.82rem;color:rgba(255,255,255,.78);flex:none;width:190px}
+.rj-arow i{flex:1;height:8px;border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.05))}
+.rj-arow.total{border-bottom:none;padding-top:12px}
+.rj-arow.total span{color:#fff;font-weight:600}
+.rj-arow.total i{background:linear-gradient(90deg,var(--teal),var(--teal-light));height:10px}
+.rj-hero{display:flex;align-items:center;gap:22px;border-radius:18px;padding:20px 24px;margin:6px 0 14px;background:linear-gradient(120deg,var(--teal) 0%,#0B5560 60%,var(--ink) 100%);color:#fff;box-shadow:0 26px 60px -30px rgba(0,90,100,.55)}
+.rj-hk{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:7px}
+.rj-ht{font-family:var(--serif);font-size:1.7rem;line-height:1.05;margin-bottom:8px}
+.rj-ht em{font-style:italic;color:var(--gold-soft)}
+.rj-hero p{font-size:.86rem;line-height:1.55;color:rgba(255,255,255,.82);max-width:56ch}
+.rj-heday{flex:none;text-align:center;border-left:1px solid rgba(255,255,255,.25);padding-left:22px}
+.rj-heday span{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px}
+.rj-heday b{font-family:var(--serif);font-style:italic;font-size:1.9rem;color:var(--gold-soft);line-height:1}
+.rj-path{display:flex;align-items:stretch;gap:10px;margin-top:14px}
+.rj-pstep{flex:1;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:13px 14px;transition:transform .3s var(--eo),box-shadow .3s}
+.rj-pstep:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.rj-pstep b{display:block;font-family:var(--mono);font-size:.78rem;color:#B87514}
+.rj-pstep span{display:block;font-weight:600;font-size:.88rem;color:var(--ink);margin:4px 0 5px}
+.rj-pstep p{font-size:.76rem;line-height:1.45;color:var(--muted)}
+.rj-parr{align-self:center;color:var(--teal);font-size:1.1rem;flex:none}
+.rj-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.rj-stat{border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:20px;transition:transform .3s var(--eo),box-shadow .3s}
+.rj-stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.rj-stat.hl{background:linear-gradient(150deg,var(--teal) 0%,#0B4B55 70%);border-color:transparent;color:#fff;box-shadow:0 24px 55px -28px rgba(0,90,100,.6)}
+.rj-sk{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.rj-stat.hl .rj-sk{color:rgba(255,255,255,.7)}
+.rj-sv{font-family:var(--serif);font-size:2.5rem;line-height:1;color:var(--ink);margin-bottom:10px}
+.rj-stat.hl .rj-sv{color:#fff}
+.rj-sv small{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-left:7px}
+.rj-stat.hl .rj-sv small{color:rgba(255,255,255,.65)}
+.rj-stat p{font-size:.82rem;line-height:1.5;color:var(--muted)}
+.rj-stat.hl p{color:rgba(255,255,255,.82)}
+.rj-stat p b{color:var(--ink)}
+.rj-stat.hl p b{color:#fff}
+.rj-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.rj-col{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:16px 17px}
+.rj-addons{margin-top:16px;border:1px solid var(--line);border-radius:16px;background:var(--bg);padding:15px 17px}
+.rj-agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 16px}
+.rj-agrid span{display:flex;align-items:baseline;gap:6px;font-size:.76rem;color:var(--muted);border-bottom:1px dashed var(--line);padding:6px 0}
+.rj-agrid span b{color:var(--ink);flex:none}
+.rj-agrid span i{margin-left:auto;font-style:normal;font-family:var(--mono);font-size:.7rem;color:var(--teal);flex:none}
+@media(max-width:1100px){.rj-vals{grid-template-columns:repeat(3,1fr)}.rj-grid.four{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){
+  .rj-grid.two,.rj-grid.three,.rj-grid.four,.rj-stats,.rj-cols,.rj-agrid,.rj-split{grid-template-columns:1fr}
+  .rj-vals{grid-template-columns:1fr 1fr}
+  .rj-path{flex-direction:column}
+  .rj-parr{transform:rotate(90deg);align-self:flex-start;margin-left:18px}
+  .rj-hero{flex-direction:column;align-items:flex-start}
+  .rj-heday{border-left:none;border-top:1px solid rgba(255,255,255,.25);padding:14px 0 0}
+  .rj-abody{grid-template-columns:1fr}
+  .rj-arail{flex-direction:row;flex-wrap:wrap;border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:10px}
+  .rj-arail span{padding:4px 10px;border-left:none}
+}
+@media(prefers-reduced-motion:reduce){.pin-card{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1205,6 +1378,10 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 <div class="chrome">
   <div class="brand"><img class="brand-mark" src="data:image/png;base64,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" alt="Partners Mortgage"><span class="bt">Partners Mortgage</span></div>
   <nav class="nav" id="nav"></nav>
+  <div class="deckswitch" id="deckswitch" role="tablist" aria-label="Presentation">
+    <button class="dsb on" id="ds-pm" type="button" role="tab" aria-selected="true">You Matter</button>
+    <button class="dsb" id="ds-rc" type="button" role="tab" aria-selected="false">Onboarding</button>
+  </div>
   <span class="pzchip" id="pz-chip" style="display:none"><i></i><span id="pz-chip-t"></span></span>
   <span class="count" id="count">01 / 18</span>
   <button class="gridbtn savebtn" id="savebtn" title="Save &amp; get shareable link" aria-label="Save this presentation" style="margin-right:6px">
@@ -1667,6 +1844,365 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     </div>
     <a class="cta" data-reveal href="mailto:peter@partnersmortgage.com?cc=aboyd@partnersmortgage.com&subject=Discovery%20Call%20Request%20%E2%80%94%20Partners%20Mortgage">Book a Discovery Call <span class="ar">&rarr;</span></a>
     <p style="margin-top:34px;font-size:.7rem;color:rgba(255,255,255,.6);line-height:1.55;max-width:72ch;margin-left:auto;margin-right:auto;font-family:var(--mono)">The Turnkey Foundation Inc. DBA Partners Mortgage. NMLS #1025894. For licensing information visit nmlsconsumeraccess.org. Equal Housing Lender. (844) 727-8684 &middot; www.PartnersMortgage.com</p>
+  </div>
+</section>
+
+
+<!-- RC 1 COVER -->
+<section class="slide bg-teal" data-deck="rc" data-sec="Welcome" style="display:none">
+  <div class="orbs"><div class="orb a"></div><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Partners Mortgage &middot; New Partner Onboarding</span>
+    <h1 class="display" data-reveal>Your onboarding <em>journey.</em></h1>
+    <p class="lede" data-reveal>Welcome to the team. Here is exactly what happens between &ldquo;yes&rdquo; and your first funded file &mdash; who is involved, what unlocks when, and every tool waiting for you on day one.</p>
+    <p class="lede" data-reveal style="margin-top:14px">Typically completed in about <b><span data-count="10">10</span> days</b> &mdash; the keys to the castle open as you complete your steps.</p>
+  </div>
+</section>
+
+<!-- RC 2 VALUES -->
+<section class="slide bg-light" data-deck="rc" data-sec="Welcome" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>What we value</span>
+    <h2 class="head" data-reveal>Established in 1988 &mdash; <em><span data-count="37">37</span> years young.</em></h2>
+    <div class="rj-vals" data-reveal>
+      <div class="rj-val"><div class="rj-vk">Integrity</div><p>We keep our promises and stand firm on our commitments to our customers, referral partners, and team.</p></div>
+      <div class="rj-val"><div class="rj-vk">Solutions</div><p>We are focused on solving problems and finding solutions that best suit your needs.</p></div>
+      <div class="rj-val"><div class="rj-vk">Relationships</div><p>We build and strengthen relationships based on trust and mutual respect.</p></div>
+      <div class="rj-val"><div class="rj-vk">Diligence</div><p>We work hard and take pride in giving our best. No casual efforts, no half measures.</p></div>
+      <div class="rj-val"><div class="rj-vk">Wellbeing</div><p>We believe your wellbeing matters. Financial, professional, emotional, and physical.</p></div>
+    </div>
+    <div class="rj-foot" data-reveal>Partners Mortgage &middot; NMLS #2353348</div>
+  </div>
+</section>
+
+<!-- RC 3 TURNKEY -->
+<section class="slide bg-ink" data-deck="rc" data-sec="Welcome" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>How we're structured</span>
+    <h2 class="head" data-reveal>One foundation. <em>Two brands.</em></h2>
+    <div class="rj-org" data-reveal>
+      <div class="rj-org-top"><div class="rj-org-name">The Turnkey Foundation</div><div class="rj-org-sub">Parent company &middot; funds &amp; supports loan operations</div></div>
+      <div class="rj-org-arms"><i></i><i></i></div>
+      <div class="rj-org-row">
+        <div class="rj-org-node hl"><div class="rj-org-name">Partners Mortgage</div><div class="rj-org-sub">DBA branch of Turnkey &middot; <em>You matter.</em></div></div>
+        <div class="rj-org-node"><div class="rj-org-name">Arbor Financial Group</div><div class="rj-org-sub">DBA branch of Turnkey</div></div>
+      </div>
+    </div>
+    <p class="lede rj-narrow" data-reveal>You will sometimes see communications from any of these entities depending on the specific service or division involved. Don&rsquo;t worry &mdash; you are part of the Partners team!</p>
+  </div>
+</section>
+
+<!-- RC 4 JOURNEY OVERVIEW -->
+<section class="slide bg-light" data-deck="rc" data-sec="The Journey" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Onboarding journey</span>
+    <h2 class="head" data-reveal>Who&rsquo;s involved &mdash; and <em>what happens when.</em></h2>
+    <div class="rj-split" data-reveal>
+      <div class="rj-side">
+        <div class="rj-k">Who&rsquo;s involved</div>
+        <div class="rj-chips">
+          <span class="rj-chip">You</span><span class="rj-chip">Your Recruiter</span><span class="rj-chip">Onboarding Manager</span><span class="rj-chip">Onboarding Team</span><span class="rj-chip">Greenlight (IT dept)</span><span class="rj-chip">ADP</span><span class="rj-chip">Finance</span>
+        </div>
+        <p class="rj-note-p">A whole bench moves the moment you say yes &mdash; you never chase your own setup.</p>
+      </div>
+      <div class="rj-side">
+        <div class="rj-k">Typical timeline</div>
+        <ol class="rj-steps">
+          <li><b>Determine start date</b></li>
+          <li><b>DocuSign sent</b></li>
+          <li><b>DocuSign returned</b></li>
+          <li><b>Background check</b> &mdash; once received (3&ndash;7 days), your ARIVE credentials are sent</li>
+          <li><b>Attend Orientation</b></li>
+          <li><b>Attend ARIVE training</b></li>
+          <li><b>Welcome email</b> with links and dates of trainings</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 5 LICENSE -->
+<section class="slide bg-teal" data-deck="rc" data-sec="The Journey" style="display:none">
+  <div class="orbs"><div class="orb a"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Your license</span>
+    <h2 class="head" data-reveal>Your license moves <em>on your timeline.</em></h2>
+    <div class="rj-grid two" data-reveal>
+      <div class="rj-card"><div class="rj-k">How it works</div><p>Licensing will reach out with license transfer instructions &mdash; a guided handoff, not a scavenger hunt.</p></div>
+      <div class="rj-card"><div class="rj-k">Our promise</div><p>Licensing will <b>not</b> reach out to NMLS or touch your license until <b>you are ready</b>.</p></div>
+    </div>
+    <div class="rj-unlock" data-reveal>
+      <div class="rj-uk">License transferred &#127881; &mdash; the keys start turning</div>
+      <div class="rj-chips light">
+        <span class="rj-chip">Meet your team</span><span class="rj-chip">Lender Price credentials</span><span class="rj-chip">Lender credentials</span><span class="rj-chip">Partners Credit credentials (no affiliation)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 6 FIRST 10 DAYS -->
+<section class="slide bg-light" data-deck="rc" data-sec="The Journey" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Your first ~<span data-count="10">10</span> days</span>
+    <h2 class="head" data-reveal>The keys to the castle <em>open as you go.</em></h2>
+    <div class="rj-grid three" data-reveal>
+      <div class="rj-card">
+        <div class="rj-k">Meet your team</div>
+        <p><b>Processing Manager &mdash; Kendra Tetz</b> assigns your team based on location and capacity.</p>
+        <p>Your team consists of an <b>LOA &amp; Processor</b>, or a <b>HYBRID</b> (all in one).</p>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Attend orientation &amp; trainings</div>
+        <ul class="rj-list"><li>Orientation</li><li>ARIVE pt 1 &amp; 2</li><li>Lender List training</li><li>Pricing training</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Marketing</div>
+        <p>Transfer your database to our <b>Partners Go High Level CRM</b> &amp; into <b>EiOS</b>.</p>
+      </div>
+    </div>
+    <div class="rj-band" data-reveal>Typically your onboarding journey will be completed in approx. <b><span data-count="10">10</span> days</b>. Any questions? Your onboarding team has you covered at every step.</div>
+  </div>
+</section>
+
+<!-- RC 7 TRANSITION -->
+<section class="slide bg-ink" data-deck="rc" data-sec="Transition" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Transition plan</span>
+    <h2 class="head" data-reveal>Producing from <em>day one.</em></h2>
+    <div class="rj-lead-chip" data-reveal><b>Leif Potter</b> &mdash; Transition Manager &middot; with <b>Tiffany</b></div>
+    <div class="rj-grid three tight" data-reveal>
+      <div class="rj-card">
+        <div class="rj-k">Submitting new loan applications</div>
+        <p>Any potential new applications you receive during the transition can be sent to <b>whyleifpotter.com</b> until your ARIVE credentials are issued. When submitting a file, email Leif any details you have on the borrower or scenario.</p>
+        <ul class="rj-list"><li>Leif runs credit once authorization is provided</li><li>Tiffany begins the pre-approval process</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Pre-approval &amp; file review</div>
+        <p>Once the borrower is pre-approved, Leif schedules a screen-share session with you to:</p>
+        <ul class="rj-list"><li>Review the file</li><li>Run pricing</li><li>Select the appropriate program and lender</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Communication &amp; visibility</div>
+        <p>Tiffany copies you on <b>all</b> borrower communications. Once your ARIVE credentials are active, you also have full visibility into file activity and communication within the platform.</p>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Scenario support</div>
+        <p>Leif is your primary point of contact for:</p>
+        <ul class="rj-list"><li>Loan scenarios</li><li>Program guidance</li><li>Pricing</li></ul>
+      </div>
+      <div class="rj-card wide">
+        <div class="rj-k">Our commitment</div>
+        <p>Leif and Tiffany treat every client as if they were their own. They are an exceptional team dedicated to providing a smooth, professional experience for both you and your borrowers &mdash; from start to finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 8 LO RESPONSIBILITIES -->
+<section class="slide bg-light" data-deck="rc" data-sec="How We Work" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>How we work &middot; Loan Officer</span>
+    <h2 class="head" data-reveal>Loan Officer <em>responsibilities.</em></h2>
+    <p class="rj-sub" data-reveal>Essential duties &amp; workflow overview &mdash; you stay on relationships and strategy; your LOA and processor carry the file.</p>
+    <div class="rj-grid three dense" data-reveal>
+      <div class="rj-card">
+        <div class="rj-k">Lead engagement &amp; intake</div>
+        <ul class="rj-list"><li>Make initial contact with lead and send the &lsquo;Apply Now&rsquo; link</li><li>Follow up regularly until the application is submitted</li><li>Notify LOA once the application is in; provide borrower / preapproval context</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Application &amp; preapproval</div>
+        <ul class="rj-list"><li>Pull credit report (if LOA is unlicensed)</li><li>Once LOA confirms borrower is ready and provides base numbers: conduct a strategic consultation to explore loan options and scenarios</li><li>Issue the official Pre-Approval Letter once structure is decided</li><li>Notify LOA of final structure; update ARIVE and CRM notes</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Preapproval to contract</div>
+        <ul class="rj-list"><li>Maintain borrower communication from preapproval through contract acceptance (purchase) or decision to proceed (refi / HELOC)</li><li>Once in contract, email LOA: final loan structure (amount, rate, investor), fully executed purchase contract (if applicable), escrow / title information</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Locking &amp; disclosures</div>
+        <ul class="rj-list"><li>Once LOA uploads to the investor portal: lock the loan (or give a licensed LOA lock guidance if floating)</li><li>Confirm all pricing details including discount / origination points for disclosures</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Pipeline communication &amp; problem-solving</div>
+        <ul class="rj-list"><li>Communicate status updates to borrower and agents throughout the loan</li><li>Notify borrower when contingencies are met</li><li>If a loan is suspended or has underwriting, appraisal, or condition issues: LO communicates directly with the borrower and collaborates with LOA and processor on resolution strategies</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Closing coordination</div>
+        <ul class="rj-list"><li>Follow up with the processor consistently from underwriting through funding</li><li>Coordinate signing with borrower and escrow</li><li>Ensure a smooth, timely close and a positive borrower experience</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 9 LOA RESPONSIBILITIES -->
+<section class="slide bg-light" data-deck="rc" data-sec="How We Work" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>How we work &middot; Loan Officer Assistant</span>
+    <h2 class="head" data-reveal>Loan Officer Assistant <em>responsibilities.</em></h2>
+    <p class="rj-sub" data-reveal>Essential duties &amp; workflow overview &mdash; the engine room behind every file.</p>
+    <div class="rj-grid four dense" data-reveal>
+      <div class="rj-card">
+        <div class="rj-k">File setup &amp; application review</div>
+        <ul class="rj-list"><li>Review new applications; structure the ARIVE file per LO notes</li><li>Pull credit report (if licensed)</li><li>Review, approve, rename and organize all documents uploaded to ARIVE or emailed</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Borrower communication &amp; docs follow-up</div>
+        <ul class="rj-list"><li>Prepare and send the needs-list email to borrower, CC the Loan Officer</li><li>Follow up until all documents and information are received</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Income &amp; preapproval prep</div>
+        <ul class="rj-list"><li>Send employment verifications; accurately calculate qualifying income (income worksheet provided)</li><li>Once docs and income are complete, prepare the base preapproval summary and send to LO</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Contract intake &amp; escrow coordination</div>
+        <ul class="rj-list"><li>Once in contract or ready for refi / HELOC: receive the fully executed contract and escrow details</li><li>Send the escrow request and save documents to ARIVE</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">File structuring &amp; property research</div>
+        <ul class="rj-list"><li>Comprehensively review the contract; complete ARIVE file setup</li><li>Pull property details and tax bill; calculate property taxes (tax worksheet provided)</li><li>Research HOA or solar through Zillow, Redfin, etc.</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Lock preparation &amp; investor upload</div>
+        <ul class="rj-list"><li>Prepare an updated needs list; update borrower on next steps</li><li>Confirm investor with LO; upload the .XML FNMA file to the investor portal</li><li>Confirm lock guidance and discount / origination point details</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Loan submission &amp; processing</div>
+        <ul class="rj-list"><li>Prepare the Underwriter Cover Letter summarizing the loan (template provided)</li><li>Complete the &lsquo;Loan Setup&rsquo; tab in ARIVE; send the submission email to the processor</li><li>Attach title fee sheet, lock (if applicable) and cover letter</li></ul>
+      </div>
+      <div class="rj-card">
+        <div class="rj-k">Disclosures &amp; underwriting prep</div>
+        <ul class="rj-list"><li>Follow up with borrower until disclosures are signed</li><li>Once signed, review documentation and confirm readiness</li><li>Notify processor with final structure, document status, and underwriting readiness</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 10 ARIVE -->
+<section class="slide bg-ink" data-deck="rc" data-sec="Systems" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Your loan operating system</span>
+    <h2 class="head" data-reveal>ARIVE. <em>Everything in one file.</em></h2>
+    <div class="rj-arive" data-reveal>
+      <div class="rj-abar"><i></i><i></i><i></i><span>ARIVE &middot; Loan &amp; Property Info</span></div>
+      <div class="rj-abody">
+        <div class="rj-arail">
+          <span>Loan &amp; Property</span><span>Borrower Info</span><span>Financial Info</span><span>Products &amp; Pricing</span><span>Review Fees</span><span>Dual AUS</span><span>Loan Center</span><span>Client Needs</span><span>Conditions</span><span>Documents</span><span>Disclosure Forms</span><span>Loan Quotes</span><span>Funding / Revenue</span><span>Audit &amp; Dates</span>
+        </div>
+        <div class="rj-amain">
+          <div class="rj-ak">Proposed monthly payment &mdash; built as you structure</div>
+          <div class="rj-arow"><span>Principal &amp; interest</span><i></i></div>
+          <div class="rj-arow"><span>Homeowners insurance</span><i></i></div>
+          <div class="rj-arow"><span>Property taxes</span><i></i></div>
+          <div class="rj-arow"><span>Mortgage insurance</span><i></i></div>
+          <div class="rj-arow"><span>Association dues</span><i></i></div>
+          <div class="rj-arow total"><span>Total PITI</span><i></i></div>
+        </div>
+      </div>
+    </div>
+    <p class="rj-sub onink" data-reveal>Purchase and refi in one workspace &mdash; pricing, dual AUS, disclosures, conditions, and funding without ever leaving the file.</p>
+  </div>
+</section>
+
+<!-- RC 11 MARKETING STUDIO -->
+<section class="slide bg-teal" data-deck="rc" data-sec="Systems" style="display:none">
+  <div class="orbs"><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Partners Marketing Studio</span>
+    <h2 class="head" data-reveal>Every marketing tool. <em>One studio.</em> Built for you.</h2>
+    <p class="rj-sub onink" data-reveal>Eight tools and resources. All live. All built for the field.</p>
+    <div class="rj-grid four dense" data-reveal>
+      <div class="rj-card"><div class="rj-k">Loan <em>Lens</em></div><p>AI document intelligence &mdash; read bank statements, paystubs and credit reports in seconds, with investor overlays built in.</p></div>
+      <div class="rj-card"><div class="rj-k">Streamline <em>Lens</em></div><p>FHA Streamline &amp; VA IRRRL benefit tests &mdash; delivers a borrower-ready proposal in one pass.</p></div>
+      <div class="rj-card"><div class="rj-k">Flyer <em>Studio</em></div><p>Co-branded flyers, one-sheets and program promos in minutes &mdash; 50+ templates with your LO branding pulled in automatically.</p></div>
+      <div class="rj-card"><div class="rj-k">Social <em>Studio</em></div><p>Multi-platform social command center &mdash; compose and schedule across LinkedIn, Instagram and Facebook with AI-assisted captions.</p></div>
+      <div class="rj-card"><div class="rj-k">Ultimate <em>Homebuyer Guide</em></div><p>Co-branded, interactive digital guide for first-time and move-up buyers &mdash; ready to share, with your branding.</p></div>
+      <div class="rj-card"><div class="rj-k">Realtor <em>Radar</em></div><p>Your CRM for referral partnerships &mdash; discover, track and cultivate the agents who send you business.</p></div>
+      <div class="rj-card"><div class="rj-k">Reverse Mortgage <em>Dept.</em></div><p>When a reverse is the right fit, refer your borrower to our reverse specialists &mdash; they handle the specialized process, you stay the trusted contact.</p></div>
+      <div class="rj-card"><div class="rj-k">Spanish Speaking <em>LO Referral</em></div><p>When your borrower&rsquo;s first language is Spanish, refer them to a bilingual Partners LO &mdash; same team, same care, in the language they trust most.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 12 PAYROLL -->
+<section class="slide bg-light" data-deck="rc" data-sec="Comp &amp; Fees" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>How everyone gets paid</span>
+    <h2 class="head" data-reveal>At Partners, we run payroll <em>every day.</em></h2>
+    <p class="rj-sub" data-reveal>Most companies cut checks twice a month. Our 1099 loan officers are paid the moment a funded file is approved &mdash; money goes out the door every single business day.</p>
+    <div class="rj-hero" data-reveal><div><div class="rj-hk">1099 loan officers</div><div class="rj-ht">Paid the day <em>your</em> file is ready.</div><p>Your commission follows the loan, not the calendar. As soon as a file funds and your breakdown is approved, payment is sent by ACH the next business day.</p></div><div class="rj-heday"><span>Partners runs payroll</span><b>Every day</b></div></div>
+    <div class="rj-grid two" data-reveal>
+      <div class="rj-card"><div class="rj-k">Correspondent files</div><p>Typically purchased by the investor about <b>7&ndash;9 days</b> after funding. Once purchased, we prepare your commission breakdown from the funding figures and purchase advice. Check purchase status in <b>ARIVE</b> or with your funder.</p></div>
+      <div class="rj-card"><div class="rj-k">Brokered, HELOC &amp; reverse files</div><p>Once we receive the <b>check or wire</b> from escrow or the lender, we prepare your commission breakdown for review.</p></div>
+    </div>
+    <div class="rj-path" data-reveal>
+      <div class="rj-pstep"><b>01</b><span>File funds</span><p>Loan is purchased, or the wire / check is received.</p></div>
+      <div class="rj-parr">&rarr;</div>
+      <div class="rj-pstep"><b>02</b><span>Breakdown sent</span><p>You receive your breakdown, generally within 1&ndash;2 business days.</p></div>
+      <div class="rj-parr">&rarr;</div>
+      <div class="rj-pstep"><b>03</b><span>You review</span><p>Respond ASAP to approve or flag any corrections.</p></div>
+      <div class="rj-parr">&rarr;</div>
+      <div class="rj-pstep"><b>04</b><span>Paid via ACH</span><p>Approved commissions are sent the following business day.</p></div>
+    </div>
+    <div class="rj-band" data-reveal><b>A quick note on timing.</b> Turnaround can vary slightly with volume &mdash; our target is 1&ndash;2 business days once we have what we need to process. The faster you review and approve your breakdown, the faster your commission goes out the door.</div>
+    <div class="rj-grid two" data-reveal>
+      <div class="rj-card slim"><div class="rj-k">W-2 loan officer &middot; commission earners</div><p>Paid <b>semi-monthly</b> &mdash; the <b>15th &amp; last day</b> of the month.</p></div>
+      <div class="rj-card slim"><div class="rj-k">W-2 employee &middot; salaried &amp; hourly</div><p>Paid <b>semi-monthly</b> &mdash; the <b>15th &amp; 30th</b> of each month.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 13 FEES -->
+<section class="slide bg-light" data-deck="rc" data-sec="Comp &amp; Fees" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Fees, bonuses &amp; what is included</span>
+    <h2 class="head" data-reveal>What it costs &mdash; and <em>everything you get.</em></h2>
+    <p class="rj-sub" data-reveal>One flat monthly Foundation covers your entire technology and marketing stack. Here is the full breakdown, plus how per-file processing and team bonuses work.</p>
+    <div class="rj-stats" data-reveal>
+      <div class="rj-stat hl"><div class="rj-sk">Your Foundation</div><div class="rj-sv">$<span data-count="175">175</span><small>/month</small></div><p>All technology, marketing, and support. One flat fee, no add-ons, no surprises.</p></div>
+      <div class="rj-stat"><div class="rj-sk">Processing collection</div><div class="rj-sv">$<span data-count="795">795</span><small>required</small></div><p>Collected on every file. You can raise it to <b>$1,095</b> to cover the bonuses.</p></div>
+      <div class="rj-stat"><div class="rj-sk">Team bonuses</div><div class="rj-sv">$<span data-count="300">300</span><small>per file</small></div><p>$150 LOA bonus and $150 processor bonus, paid by the loan officer.</p></div>
+    </div>
+    <div class="rj-band" data-reveal><b>You choose how the bonuses are funded.</b> Collect the standard $795 and pay the $300 in bonuses ($150 LOA plus $150 processor) from your commission &mdash; or raise the processing collection to $1,095, and the additional $300 covers both bonuses with nothing out of your comp.</div>
+    <div class="rj-band alt" data-reveal><b>Brokered files with no embedded fee.</b> When a loan is brokered and the lender does not include an embedded processing fee, or you waive processing for the borrower, a flat <b>$400</b> processing charge applies to you. Partners absorbs the rest, so we are effectively splitting the cost with you rather than passing it along in full.</div>
+  </div>
+</section>
+
+<!-- RC 14 INCLUDED -->
+<section class="slide bg-light" data-deck="rc" data-sec="Comp &amp; Fees" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Included in your $<span data-count="175">175</span> Foundation</span>
+    <h2 class="head" data-reveal>Built in-house. <em>Exclusive to Partners.</em></h2>
+    <div class="rj-grid four dense" data-reveal>
+      <div class="rj-card slim"><div class="rj-k">Loan <em>Lens</em></div><p>AI document intelligence with investor overlays built in.</p></div>
+      <div class="rj-card slim"><div class="rj-k">Flyer <em>Studio</em></div><p>Co-branded flyers and one-sheets, 50+ auto-branded templates.</p></div>
+      <div class="rj-card slim"><div class="rj-k">Social <em>Studio</em></div><p>Multi-platform social command center with AI captions.</p></div>
+      <div class="rj-card slim"><div class="rj-k">Ultimate <em>Homebuyer Guide</em></div><p>Co-branded interactive buyer guide, ready to share.</p></div>
+    </div>
+    <div class="rj-cols" data-reveal>
+      <div class="rj-col"><div class="rj-k">Platform &amp; pricing</div><ul class="rj-list"><li>ARIVE LOS</li><li>Lender Price &mdash; 90+ lenders, 165+ network</li><li>EiOS CRM &amp; Partners WorkDesk</li><li>Partners Business Intelligence</li><li>Best Offer Package</li></ul></div>
+      <div class="rj-col"><div class="rj-k">Marketing &amp; brand</div><ul class="rj-list"><li>Custom Marketing Design Team</li><li>Personal Web Page</li><li>Automated Marketing</li><li>Partners Insider Weekly</li><li>Content Library &amp; Video Scripts</li><li>Social &amp; Google Business Consulting</li></ul></div>
+      <div class="rj-col"><div class="rj-k">Support &amp; operations</div><ul class="rj-list"><li>In-House Processing Pods</li><li>Dedicated Partner Liaison</li><li>Live System &amp; Pricing Training</li><li>1:1 Marketing Consultation</li><li>Microsoft 365 + IT Support</li></ul></div>
+    </div>
+    <div class="rj-addons" data-reveal>
+      <div class="rj-k">Optional premium add-ons</div>
+      <div class="rj-agrid">
+        <span><b>Homebot</b> client home-value retention <i>$225/mo</i></span>
+        <span><b>MBS Highway</b> market insight &amp; calculators <i>$25/mo</i></span>
+        <span><b>VERSE</b> AI lead qualification <i>$150/mo</i></span>
+        <span><b>RETR</b> Realtor relationship platform <i>$99</i></span>
+        <span><b>Optiseo Website</b> professional LO website <i>Custom</i></span>
+        <span><b>Closing Gift Program</b> delight clients at close <i>$40+</i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RC 15 CLOSE -->
+<section class="slide bg-teal" data-deck="rc" data-sec="You Matter" style="display:none">
+  <div class="orbs"><div class="orb a"></div><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Welcome to Partners</span>
+    <h1 class="display" data-reveal>You <em>matter.</em></h1>
+    <p class="lede" data-reveal>Your onboarding team, your transition desk, and every tool in the studio are already working for you. All that&rsquo;s left is your first file &mdash; and we can&rsquo;t wait to fund it with you.</p>
   </div>
 </section>
 
@@ -2239,6 +2775,20 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   </div>
 </div>
 
+<div class="pinmodal" id="pinmodal">
+  <div class="pin-card">
+    <button class="pin-x" id="pin-x" type="button" aria-label="Close">&times;</button>
+    <span class="eyebrow">Team access</span>
+    <h2>Enter the team <em>PIN.</em></h2>
+    <p class="pin-sub">The onboarding walkthrough is for Partners team members. Ask your recruiter for the PIN.</p>
+    <div class="pin-row">
+      <input type="password" id="pin-input" inputmode="numeric" maxlength="8" placeholder="&bull;&bull;&bull;&bull;" autocomplete="off" aria-label="Team PIN">
+      <button class="pin-go" id="pin-go" type="button">Unlock <span class="ar">&rarr;</span></button>
+    </div>
+    <div class="pin-err" id="pin-err" role="alert"></div>
+  </div>
+</div>
+
 <div class="decksave" id="decksave">
   <div class="ds-card">
     <button class="ds-x" id="decksave-x" type="button" aria-label="Close">&times;</button>
@@ -2523,6 +3073,80 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     if(i===total-1){ setTimeout(function(){ fireConfetti(s.querySelector('.wrap')); }, 350); }
   }
 
+  /* ===== dual deck: You Matter (pm) / Onboarding (rc) ===== */
+  var DECK='pm';
+  function applyDeckVisibility(){
+    for(var di=0; di<allSlides.length; di++){
+      var ds=allSlides[di], isR=(ds.getAttribute('data-deck')==='rc');
+      if(DECK==='rc'){ ds.style.display = isR ? '' : 'none'; }
+      else {
+        if(isR){ ds.style.display='none'; }
+        else if(ds.id==='slide-manager'){ ds.style.display=(PZ&&PZ.mgrOn&&PZ.mgrName)?'':'none'; }
+        else if(ds.id==='slide-money'){ ds.style.display=(PZ&&PZ.lmOn===false)?'none':''; }
+        else { ds.style.display=''; }
+      }
+    }
+    rebuildSlides();
+  }
+  function syncDeckSwitch(){
+    var bp=el('ds-pm'), br=el('ds-rc');
+    if(bp){ bp.classList.toggle('on',DECK==='pm'); bp.setAttribute('aria-selected',DECK==='pm'?'true':'false'); }
+    if(br){ br.classList.toggle('on',DECK==='rc'); br.setAttribute('aria-selected',DECK==='rc'?'true':'false'); }
+  }
+  function setDeck(which){
+    if(which===DECK) return;
+    DECK=which;
+    syncDeckSwitch();
+    applyDeckVisibility();
+    for(var ci=0; ci<allSlides.length; ci++){ allSlides[ci].classList.remove('active','leaving','anim'); allSlides[ci].style.animation=''; }
+    initialized=false; cur=0;
+    go(0);
+  }
+  /* PIN gate: shared viewers unlock the onboarding deck once */
+  var PIN_KEY='pm_onboard_pin_ok';
+  function pinRemembered(){ try{ return localStorage.getItem(PIN_KEY)==='1'; }catch(e){ return false; } }
+  function openPin(){
+    var m=el('pinmodal'); if(!m) return;
+    var er=el('pin-err'); if(er) er.textContent='';
+    var pi=el('pin-input'); if(pi) pi.value='';
+    m.classList.add('show');
+    setTimeout(function(){ try{ el('pin-input').focus(); }catch(e){} },180);
+  }
+  function closePin(){ var m=el('pinmodal'); if(m) m.classList.remove('show'); }
+  function tryPin(){
+    var pi=el('pin-input');
+    var v=(pi&&pi.value?pi.value:'').replace(/\s+/g,'');
+    if(v.split('').reverse().join('')==='7861'){
+      try{ localStorage.setItem(PIN_KEY,'1'); }catch(e){}
+      closePin(); setDeck('rc');
+    } else {
+      var er=el('pin-err'); if(er) er.textContent='That PIN isn\u2019t right \u2014 check with your recruiter.';
+      var card=document.querySelector('.pin-card');
+      if(card){ card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
+      if(pi){ pi.select(); }
+    }
+  }
+  function requestDeck(which){
+    if(which==='rc' && SHARED && !pinRemembered()){ openPin(); return; }
+    setDeck(which);
+  }
+  (function(){
+    var bp=el('ds-pm'), br=el('ds-rc');
+    if(bp) bp.addEventListener('click',function(){ requestDeck('pm'); });
+    if(br) br.addEventListener('click',function(){ requestDeck('rc'); });
+    var pg=el('pin-go'); if(pg) pg.addEventListener('click',tryPin);
+    var pi=el('pin-input'); if(pi) pi.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); tryPin(); } });
+    var px=el('pin-x'); if(px) px.addEventListener('click',closePin);
+    var pmod=el('pinmodal'); if(pmod) pmod.addEventListener('click',function(e){ if(e.target===pmod) closePin(); });
+    document.addEventListener('keydown',function(e){
+      var m=el('pinmodal');
+      if(!m||!m.classList.contains('show')) return;
+      if(e.key==='Escape'){ closePin(); return; }
+      if(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='g'||e.key==='G'||e.key==='f'||e.key==='F'){ e.stopPropagation(); }
+    },true);
+  })();
+
+
   // distinct transition per slide, ordered so neighbors differ; direction-aware
   // Curated premium transitions — each pairs a coordinated enter+exit so the two
   // slides move as one continuous gesture. Direction-aware (forward/back).
@@ -2727,6 +3351,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     // closing headline
     el('close-head').innerHTML = (fn? (fn+', take') : 'Take')+' your career to <em>the next level.</em>';
     if(typeof choreo==='function'){ var actS=document.querySelector('.slide.active'); if(actS) choreo(actS); }
+    applyDeckVisibility();
 
     // ---- name woven through the natural "addressed to you" moments ----
     el('peter-close').textContent = fn
@@ -2833,7 +3458,13 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 
   function launch(){
     closeSetupAnimated();
-    if(!started){ started=true; go(0); }
+    if(!started){
+      started=true;
+      DECK='pm'; syncDeckSwitch(); applyDeckVisibility();
+      for(var li2=0; li2<allSlides.length; li2++){ allSlides[li2].classList.remove('active','leaving','anim'); allSlides[li2].style.animation=''; }
+      initialized=false; cur=0;
+      go(0);
+    }
     else {
       // an edit may have added/removed the manager slide — re-sync position + chrome
       if(cur>total-1) cur=total-1;
@@ -3103,6 +3734,18 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     deckGoAllTools();
   }
   var homebtnEl=el('homebtn'); if(homebtnEl) homebtnEl.addEventListener('click',deckHome);
+
+  /* ---- proportional stage zoom: the deck fills any display ---- */
+  function fitDeck(){
+    try{
+      var z=Math.min(window.innerWidth/1440, window.innerHeight/820);
+      z=Math.max(1, Math.min(z, 2.3));
+      document.documentElement.style.setProperty('--deckzoom', z.toFixed(3));
+    }catch(e){}
+  }
+  window.addEventListener('resize', fitDeck);
+  document.addEventListener('fullscreenchange', fitDeck);
+  fitDeck();
 
   /* ---- ambient pointer parallax on the big panels (desktop only) ---- */
   (function(){
@@ -4012,6 +4655,7 @@ else{dl(bytes,fn);mailPeter(name);st('Your signed letter downloaded and an email
     var payload=window.__PM_DECK__;
     if(payload && typeof payload==='object'){
       try{ personalize(payload); }catch(e){}
+      try{ applyDeckVisibility(); }catch(e){}
       try{ modeEl.classList.remove('show'); }catch(e){}
       try{ deckhomeEl.classList.remove('show'); }catch(e){}
       try{ decklibEl.classList.remove('show'); }catch(e){}
