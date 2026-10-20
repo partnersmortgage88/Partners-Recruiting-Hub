@@ -1371,6 +1371,46 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   .rj-arail span{padding:4px 10px;border-left:none}
 }
 @media(prefers-reduced-motion:reduce){.pin-card{animation:none!important}}
+
+
+/* ===== v10: presentation modernization ===== */
+/* silk reveals: spring rise with focus pull */
+.slide [data-reveal]{opacity:0;transform:translateY(30px) scale(.985);filter:blur(10px);transition:opacity .75s var(--eo),transform .9s var(--es),filter .72s var(--eo);will-change:transform,filter}
+.slide.active [data-reveal]{opacity:1;transform:none;filter:blur(0)}
+/* kinetic headlines on every slide h2 */
+.slide .head .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.slide .head .wi{display:inline-block;transform:translateY(118%)}
+.slide.active .head .wi{animation:dkWordUp .8s var(--eo) forwards;animation-delay:calc(.14s + var(--wd,0)*.05s)}
+@keyframes dkWordUp{to{transform:translateY(0)}}
+/* upgraded slide transitions (redeclared = override) */
+@keyframes inRight{from{opacity:0;transform:translate3d(72px,0,0) scale(.992);filter:blur(10px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@keyframes inLeft{from{opacity:0;transform:translate3d(-72px,0,0) scale(.992);filter:blur(10px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@keyframes inUp{from{opacity:0;transform:translate3d(0,58px,0) scale(.992);filter:blur(10px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@keyframes inDown{from{opacity:0;transform:translate3d(0,-58px,0) scale(.992);filter:blur(10px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@keyframes inFwd{from{opacity:0;transform:scale(1.06);filter:blur(12px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes inBack{from{opacity:0;transform:scale(.94);filter:blur(12px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes inRise{from{opacity:0;transform:translate3d(0,34px,0) scale(.992);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes inBlur{from{opacity:0;filter:blur(15px);transform:scale(1.022)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+@keyframes outLeft{from{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}to{opacity:0;transform:translate3d(-72px,0,0) scale(.992);filter:blur(8px)}}
+@keyframes outRight{from{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}to{opacity:0;transform:translate3d(72px,0,0) scale(.992);filter:blur(8px)}}
+@keyframes outUp{from{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}to{opacity:0;transform:translate3d(0,-58px,0) scale(.992);filter:blur(8px)}}
+@keyframes outDown{from{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}to{opacity:0;transform:translate3d(0,58px,0) scale(.992);filter:blur(8px)}}
+@keyframes outFwd{from{opacity:1;transform:scale(1);filter:blur(0)}to{opacity:0;transform:scale(1.05);filter:blur(10px)}}
+@keyframes outBack{from{opacity:1;transform:scale(1);filter:blur(0)}to{opacity:0;transform:scale(.95);filter:blur(10px)}}
+@keyframes outRise{from{opacity:1;transform:none;filter:blur(0)}to{opacity:0;transform:translate3d(0,-30px,0) scale(.994);filter:blur(8px)}}
+@keyframes outBlur{from{opacity:1;filter:blur(0);transform:scale(1)}to{opacity:0;filter:blur(13px);transform:scale(1.015)}}
+/* merged leadership quote */
+.quote.mq{font-size:clamp(1.12rem,1.9vw,1.55rem);max-width:62ch;margin:20px 0 4px}
+/* chrome motion polish */
+#progressbar{background:linear-gradient(90deg,var(--teal) 0%,var(--teal-light) 55%,var(--gold-brand) 100%);box-shadow:0 0 14px rgba(39,176,188,.5);transition:width .65s var(--eo)}
+.arrow{backdrop-filter:blur(8px);transition:all .35s var(--es)}
+.arrow:hover:not(:disabled){transform:scale(1.07)}
+.arrow:active:not(:disabled){transform:scale(.96)}
+@media(prefers-reduced-motion:reduce){
+  .slide [data-reveal]{opacity:1!important;transform:none!important;filter:none!important}
+  .slide .head .wi{transform:none!important;animation:none!important}
+  .slide{filter:none!important}
+}
 </style>
 </head>
 <body>
@@ -1428,25 +1468,13 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     <span class="eyebrow" data-reveal>The People Behind Partners</span>
     <h1 class="display" data-reveal>Leadership that <em>serves.</em></h1>
     <p class="lede" data-reveal>At Partners, leadership isn't a title, it's a posture. Our team leads from the front, serves from the heart, and believes the success of every loan officer on our platform is the measure of their own.</p>
+    <p class="quote mq" data-reveal>Our mission is to give our customers a <em>'Wow'</em> experience from A to Z. We are one team, working together for this single purpose.
+      <span class="by">Dan Trinidad &middot; Founder &amp; CEO</span></p>
     <div class="statgrid" data-reveal>
       <div class="s"><div class="n" data-count="37" data-suffix="+">37+</div><div class="l">Years Leading</div></div>
       <div class="s"><div class="n" data-count="60" data-suffix="K+">60K+</div><div class="l">Loans Closed</div></div>
       <div class="s"><div class="n" data-count="1000" data-suffix="+">1,000+</div><div class="l">LOs Onboarded</div></div>
       <div class="s"><div class="n">$1M+</div><div class="l">Cancer Research</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 3 PHILOSOPHY -->
-<section class="slide bg-ink" data-sec="Leadership">
-  <div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center">
-    <div data-reveal>
-      <span class="eyebrow">Our Leadership Philosophy</span>
-      <p class="quote">The role of a leader is not to come up with all the great ideas. It's to create an <em>environment</em> in which great ideas can happen.</p>
-    </div>
-    <div data-reveal>
-      <p class="quote" style="font-size:clamp(1.3rem,2.4vw,1.85rem)">Our mission is to give our customers a <em>'Wow'</em> experience from A to Z. We are one team, working together for this single purpose.
-      <span class="by">Dan Trinidad &middot; Founder &amp; CEO</span></p>
     </div>
   </div>
 </section>
@@ -1646,14 +1674,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     <h2 class="head" id="demo-head" style="margin-bottom:8px" data-reveal>Let's open them <em>up.</em></h2>
     <p class="lede" style="margin:0 auto 8px" data-reveal>Two of our most-used in-house tools, live. Click to launch and walk through them in real time.</p>
     <div class="toolgrid" data-reveal>
-      <a class="toolcard tc-teal" href="https://social.partnersmortgage.com" target="_blank" rel="noopener noreferrer">
+      <a class="toolcard tc-teal" id="tc-social" data-base="https://social.partnersmortgage.com" href="https://social.partnersmortgage.com" target="_blank" rel="noopener noreferrer">
         <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.7" x2="15.4" y2="6.3"/><line x1="8.6" y1="13.3" x2="15.4" y2="17.7"/></svg></div>
         <div class="tname">Social <em>Studio</em></div>
         <div class="tdesc">Compose, schedule, and engage across LinkedIn, Instagram, and Facebook from one feed, with an approved content library and AI-assisted captions.</div>
         <span class="tgo">Launch Social Studio <span class="ar">&rarr;</span></span>
         <div class="turl">social.partnersmortgage.com</div>
       </a>
-      <a class="toolcard tc-gold" href="https://flyers.partnersmortgage.com" target="_blank" rel="noopener noreferrer">
+      <a class="toolcard tc-gold" id="tc-flyer" data-base="https://flyers.partnersmortgage.com" href="https://flyers.partnersmortgage.com" target="_blank" rel="noopener noreferrer">
         <div class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="9" cy="9" r="1.6"/><path d="M4 16l4.5-4 3.5 3 3-2.5L20 17"/></svg></div>
         <div class="tname">Flyer <em>Studio</em></div>
         <div class="tdesc">Co-branded flyers and listing materials in minutes. 50+ templates with rate sheets and LO branding pulled in automatically.</div>
@@ -1675,76 +1703,6 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   </div>
 </section>
 
-<!-- 15 TOOLS tabbed -->
-<section class="slide bg-teal" data-sec="Tools & Tech">
-  <div class="wrap">
-    <span class="eyebrow" style="justify-content:center;display:flex" data-reveal>Most banks license tools. Partners builds them.</span>
-    <div class="tabs" id="toolTabs" data-reveal>
-      <button class="tab on" data-pane="p-house">Built In-House</button>
-      <button class="tab" data-pane="p-tech">Technology</button>
-      <button class="tab" data-pane="p-mkt">Marketing</button>
-      <button class="tab" data-pane="p-support">Support</button>
-      <button class="tab" data-pane="p-premium">Premium Add-Ons</button>
-    </div>
-
-    <div class="tabpane on" id="p-house" data-reveal>
-      <div class="grid g3">
-        <div class="card"><div class="kicker">Newest &middot; Beta</div><div class="ti">Partners <em>Grow</em></div><div class="bd">End-to-end recruiting CRM for Branch Managers. Pipeline, contacts, inbox, multi-touch campaigns, and an AI Control Center, all in one place.</div></div>
-        <div class="card"><div class="kicker">Live</div><div class="ti">Loan <em>Lens</em></div><div class="bd">AI document intelligence with investor overlays for HomeXpress, First Colony, The Loan Store, and Non-QM built right in.</div></div>
-        <div class="card"><div class="kicker">Live</div><div class="ti">Flyer <em>Studio</em></div><div class="bd">Co-branded flyers and listing materials in minutes. 50+ templates with rate sheets and LO branding pulled in automatically.</div></div>
-        <div class="card"><div class="kicker">Live</div><div class="ti">Social <em>Studio</em></div><div class="bd">Your central social command center with an approved content library and AI-assisted captions across every platform.</div></div>
-        <div class="card"><div class="kicker">Live</div><div class="ti"><em>Ultimate</em> Homebuyer Guide</div><div class="bd">A co-branded, interactive guide that walks borrowers through the process under your branding, ready to share.</div></div>
-        <div class="card feat"><div class="kicker">All Five Included</div><div class="ti">Shipped with your <em>$175 Foundation</em></div><div class="bd">No add-ons. No surprise fees. Proprietary platforms built exclusively for our team.</div></div>
-      </div>
-    </div>
-
-    <div class="tabpane" id="p-tech">
-      <div class="grid g3">
-        <div class="card"><div class="kicker">Core Platform</div><div class="ti">EiOS CRM &amp; <em>WorkDesk</em></div><div class="bd">Lead and loan management, pre-approval engine, proposals, plus bulk marketing and automation on Go High Level. Both included.</div></div>
-        <div class="card"><div class="kicker">LOS</div><div class="ti"><em>ARIVE</em></div><div class="bd">Web-based, mobile-friendly loan origination with integrated point of sale and pricing engine.</div></div>
-        <div class="card"><div class="kicker">Pricing Engine</div><div class="ti">Lender <em>Price</em></div><div class="bd">Prices 200+ lenders in real time for best execution on QM and Non-QM scenarios.</div></div>
-        <div class="card"><div class="kicker">Intelligence</div><div class="ti">Business <em>Intelligence</em></div><div class="bd">Integrated database retention and marketing. Know when your clients are ready before anyone else does.</div></div>
-        <div class="card"><div class="kicker">Pre-Approval</div><div class="ti">Best Offer <em>Package</em></div><div class="bd">Custom branded pre-approval packages. A new way for LOs and Realtors to collaborate on winning offers.</div></div>
-        <div class="card"><div class="kicker">Web Presence</div><div class="ti">Personal <em>Web Page</em></div><div class="bd">Your own online presence with an Apply Now link and Microsoft 365 + IT support included.</div></div>
-      </div>
-    </div>
-
-    <div class="tabpane" id="p-mkt">
-      <div class="grid g3">
-        <div class="card"><div class="kicker">Automation</div><div class="ti">Automated <em>Marketing</em></div><div class="bd">Milestone marketing, birthday and anniversary emails, and lead workflows running 24/7. Both platforms included.</div></div>
-        <div class="card"><div class="kicker">Design</div><div class="ti">Custom <em>Design Team</em></div><div class="bd">Request our design team to build custom flyers and marketing journeys tailored to your brand and clients.</div></div>
-        <div class="card"><div class="kicker">Rate Updates</div><div class="ti">Partners <em>Insider Weekly</em></div><div class="bd">Weekly rate update and Partners Digest Newsletter. Keep clients and referral partners informed.</div></div>
-        <div class="card"><div class="kicker">Social</div><div class="ti">Social <em>Consulting</em></div><div class="bd">Expert guidance on growing your social presence and engaging your audience consistently.</div></div>
-        <div class="card"><div class="kicker">Local SEO</div><div class="ti">Google <em>My Business</em></div><div class="bd">Get found locally. We help optimize your GMB profile to capture clients actively searching your market.</div></div>
-        <div class="card"><div class="kicker">Content</div><div class="ti">Content Library + <em>Scripts</em></div><div class="bd">A rich library of ready-to-use assets plus a new customizable weekly video script. Never face a blank page.</div></div>
-      </div>
-    </div>
-
-    <div class="tabpane" id="p-support">
-      <div class="grid g3">
-        <div class="card"><div class="kicker">Dedicated</div><div class="ti">Partner <em>Liaison</em></div><div class="bd">A dedicated resource assigned to you, to maximize results and help you navigate the broker channel with confidence.</div></div>
-        <div class="card"><div class="kicker">Full Service</div><div class="ti">In-House <em>Processing Pods</em></div><div class="bd">A Production Manager, Loan Officer Assistant, and Processor, all working your pipeline.</div></div>
-        <div class="card"><div class="kicker">Onboarding</div><div class="ti">Live <em>Training</em></div><div class="bd">Live, hands-on training covering every tool in your stack from day one.</div></div>
-        <div class="card"><div class="kicker">Growth</div><div class="ti">Marketing <em>Consultation</em></div><div class="bd">One-on-one strategy to help you define your niche, sharpen your message, and grow your referral base.</div></div>
-        <div class="card"><div class="kicker">IT</div><div class="ti">Microsoft 365 + <em>IT</em></div><div class="bd">Enterprise-grade productivity suite and dedicated IT support so you focus on originating.</div></div>
-        <div class="card"><div class="kicker">Access</div><div class="ti">Direct Line to <em>Leadership</em></div><div class="bd">Dan, Leif, and Peter pick up the phone. No gatekeepers, no help-desk tickets to your own leaders.</div></div>
-      </div>
-    </div>
-
-    <div class="tabpane" id="p-premium">
-      <div class="grid g3">
-        <div class="card"><div class="ti">Homebot</div><div class="bd">Client home value retention.</div><div class="num">$225 / mo</div></div>
-        <div class="card"><div class="ti">MBS Highway</div><div class="bd">Market insight &amp; calculators.</div><div class="num">$25 / mo</div></div>
-        <div class="card"><div class="ti">VERSE</div><div class="bd">AI-powered lead qualification.</div><div class="num">$150 / mo</div></div>
-        <div class="card"><div class="ti">RETR</div><div class="bd">Realtor relationship platform.</div><div class="num">$99</div></div>
-        <div class="card"><div class="ti">Optiseo Website</div><div class="bd">Professional LO website.</div><div class="num">Custom</div></div>
-        <div class="card"><div class="ti">Closing Gift Program</div><div class="bd">Delight clients at close.</div><div class="num">$40+</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 16 CALCULATOR -->
 <section class="slide bg-light" data-sec="Leaving Money?" id="slide-money">
   <div class="wrap">
     <span class="eyebrow" data-reveal>The Real Numbers</span>
@@ -1842,7 +1800,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       <div class="cc"><div class="ico">✉️</div><div class="ch">Email</div><div class="cv">peter@partnersmortgage.com</div></div>
       <div class="cc"><div class="ico">📍</div><div class="ch">Headquarters</div><div class="cv">1687 Eureka Road, Suite 100<br>Roseville, CA 95661</div></div>
     </div>
-    <a class="cta" data-reveal href="mailto:peter@partnersmortgage.com?cc=aboyd@partnersmortgage.com&subject=Discovery%20Call%20Request%20%E2%80%94%20Partners%20Mortgage">Book a Discovery Call <span class="ar">&rarr;</span></a>
+    <a class="cta" id="cta-call" style="display:none" data-reveal href="mailto:peter@partnersmortgage.com?cc=aboyd@partnersmortgage.com&subject=Discovery%20Call%20Request%20%E2%80%94%20Partners%20Mortgage">Book a Discovery Call <span class="ar">&rarr;</span></a>
     <p style="margin-top:34px;font-size:.7rem;color:rgba(255,255,255,.6);line-height:1.55;max-width:72ch;margin-left:auto;margin-right:auto;font-family:var(--mono)">The Turnkey Foundation Inc. DBA Partners Mortgage. NMLS #1025894. For licensing information visit nmlsconsumeraccess.org. Equal Housing Lender. (844) 727-8684 &middot; www.PartnersMortgage.com</p>
   </div>
 </section>
@@ -2723,6 +2681,13 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
             </div>
             <span class="tgl on" id="su-lm-tgl"><input type="checkbox" id="su-lm-on" checked><span class="knob"></span></span>
           </div>
+          <div class="lmrow">
+            <div class="lm-txt">
+              <div class="lm-t">Include the &ldquo;Book a discovery call&rdquo; close</div>
+              <div class="lm-d">For decks you send ahead of a call. Presenting live? Leave it off &mdash; they&rsquo;ve already met you.</div>
+            </div>
+            <span class="tgl" id="su-call-tgl"><input type="checkbox" id="su-call-on"><span class="knob"></span></span>
+          </div>
         </div>
 
         <div class="sgrp mgr-block" id="su-mgr-block">
@@ -2874,7 +2839,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
 
   /* ---- tabs ---- */
   var tabBar=document.getElementById('toolTabs');
-  tabBar.addEventListener('click',function(e){
+  if(tabBar) tabBar.addEventListener('click',function(e){
     var t=e.target.closest('.tab'); if(!t) return;
     tabBar.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
     t.classList.add('on');
@@ -3038,7 +3003,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   }
   function choreo(slide){
     if(reduce) return;
-    slide.querySelectorAll('h1.display, .leader h2').forEach(splitWords);
+    slide.querySelectorAll('h1.display, .leader h2, h2.head').forEach(splitWords);
     var revs=slide.querySelectorAll('[data-reveal]');
     for(var i=0;i<revs.length;i++){ revs[i].style.transitionDelay=(.14+i*.08)+'s'; }
   }
@@ -3285,6 +3250,16 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var chip=el('pz-chip');
     if(PZ.name){ el('pz-chip-t').textContent='Prepared for '+PZ.name; chip.style.display='inline-flex'; }
     else { chip.style.display='none'; }
+    // studio launch links carry the prospect's name
+    (function(){
+      var nm=(PZ&&PZ.name)?PZ.name:'';
+      var q=nm?('?pmname='+encodeURIComponent(nm)):'';
+      var ids=['tc-social','tc-flyer'];
+      for(var si=0; si<ids.length; si++){
+        var a=el(ids[si]);
+        if(a&&a.getAttribute&&a.getAttribute('data-base')) a.setAttribute('href', a.getAttribute('data-base')+q);
+      }
+    })();
     // Leaving Money slide (optional)
     (function(){
       var s=el('slide-money');
@@ -3369,9 +3344,17 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     el('summary-head').innerHTML = fn
       ? ("Here's what you're <em>signing up for</em>, "+fn+".")
       : ("What you're <em>signing up for.</em>");
-    el('close-lede').textContent = fn
-      ? ("Book a 15-minute discovery call, "+fn+". No pressure, no hard sell, just a real conversation about your future. Peter is your first call, no gatekeepers.")
-      : ("Book a 15-minute discovery call. No pressure, no hard sell, just a real conversation about your future. Peter is your first call, no gatekeepers.");
+    var __callOn=!!(d&&d.callOn);
+    var __cta=el('cta-call'); if(__cta) __cta.style.display=__callOn?'':'none';
+    if(__callOn){
+      el('close-lede').textContent = fn
+        ? ("Book a 15-minute discovery call, "+fn+". No pressure, no hard sell, just a real conversation about your future. Peter is your first call, no gatekeepers.")
+        : ("Book a 15-minute discovery call. No pressure, no hard sell, just a real conversation about your future. Peter is your first call, no gatekeepers.");
+    } else {
+      el('close-lede').textContent = fn
+        ? ('No pressure, no hard sell \u2014 just a real conversation about your future whenever you\u2019re ready, '+fn+'. Peter is your first call, no gatekeepers.')
+        : 'No pressure, no hard sell \u2014 just a real conversation about your future whenever you\u2019re ready. Peter is your first call, no gatekeepers.';
+    }
     // calculator autofill: PZ.volume is LAST 12 MONTHS (annual); monthly = annual / 12
     if(PZ.volume>0){ el('calc-volume-yr').value=fmtInt(PZ.volume); el('calc-volume').value=fmtInt(PZ.volume/12); }
     if(PZ.bps>0){ el('lmb-comp-bps').value=PZ.bps; }
@@ -3397,6 +3380,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var mgrTitle=el('su-mgr-title').value.trim();
     var mgrBio=el('su-mgr-bio').value.trim();
     return { name:name, firstName:name?name.split(/\s+/)[0]:'', company:company, volume:volume, units:units, bps:bps, pmBps:pmBps, margin:margin,
+      callOn: !!(el('su-call-on')&&el('su-call-on').checked),
       lmOn:(!el('su-lm-on')||el('su-lm-on').checked),
       mgrOn:mgrOn, mgrName:mgrName, mgrTitle:mgrTitle, mgrBio:mgrBio, mgrPhoto:mgrPhoto };
   }
@@ -3408,10 +3392,12 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     el('su-pmbps').value=(d.pmBps>0?d.pmBps:155); el('su-margin').value=(d.margin>0?d.margin:275);
     el('su-mgr-on').checked=!!d.mgrOn;
     var lmc=el('su-lm-on'); if(lmc) lmc.checked=(d.lmOn!==false);
+    var cc=el('su-call-on'); if(cc) cc.checked=!!d.callOn;
     el('su-mgr-name').value=d.mgrName||''; el('su-mgr-title').value=d.mgrTitle||''; el('su-mgr-bio').value=d.mgrBio||'';
     mgrPhoto=d.mgrPhoto||'';
     mgrSync();
     lmSync();
+    callSync();
     var pv=el('su-mgr-preview'), lb=el('su-mgr-label'), cl=el('su-mgr-clear');
     if(mgrPhoto){ pv.src=mgrPhoto; pv.style.display='block'; lb.style.display='none'; cl.style.display='inline-block'; }
     else { pv.src=''; pv.style.display='none'; lb.style.display='block'; cl.style.display='none'; }
@@ -3493,6 +3479,12 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   }
   el('su-lm-on').addEventListener('change',lmSync);
   lmSync();
+  function callSync(){
+    var c=el('su-call-on'); if(!c) return;
+    var t=el('su-call-tgl'); if(t) t.classList.toggle('on',c.checked);
+  }
+  el('su-call-on').addEventListener('change',callSync);
+  callSync();
   el('su-mgr-drop').addEventListener('click',function(){ el('su-mgr-photo').click(); });
   el('su-mgr-photo').addEventListener('change',function(e){
     var f=e.target.files&&e.target.files[0]; if(!f) return;
