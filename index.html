@@ -476,7 +476,7 @@ h2.head em{font-style:italic;color:var(--teal)}
   display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(320px,48vh,600px);
   transition:flex .6s var(--eo),border-color .4s,background .4s,box-shadow .6s var(--eo),transform .35s var(--eo);
   opacity:0;transform:translateY(30px);animation:hRise .85s var(--eo) forwards}
-.hpanel:nth-child(1){animation-delay:.48s}.hpanel:nth-child(2){animation-delay:.6s}
+.hpanel:nth-child(1){animation-delay:.48s}.hpanel:nth-child(2){animation-delay:.6s}.hpanel:nth-child(3){animation-delay:.72s}
 .hpanel::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--acc,var(--teal-light));opacity:.9;transform:scaleX(.3);transform-origin:left;transition:transform .6s var(--eo)}
 .hpanel::after{content:'';position:absolute;inset:0;background:radial-gradient(130% 100% at 85% -10%,var(--accg,rgba(0,129,139,.3)),transparent 62%);opacity:0;transition:opacity .5s}
 .hpanel:hover,.hpanel:focus-visible{border-color:rgba(255,255,255,.28);box-shadow:0 44px 96px -38px rgba(0,0,0,.72)}
@@ -1649,6 +1649,149 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   #slide-money .cols{display:grid}
   #slide-money .delta{margin-top:18px}
 }
+
+
+/* ===== v14: Branch Manager deck ===== */
+.bg-light .nw-tagline{color:var(--ink)}
+.bg-light .nw-tagline em{color:var(--teal)}
+.bg-light .nw-ask{color:var(--ink)}
+.bg-light .nw-ask em{color:var(--teal)}
+/* priorities: list + detail */
+.bm-prio{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;margin-top:26px;align-items:stretch}
+.bm-plist{display:flex;flex-direction:column;gap:9px}
+.bm-pr{display:flex;align-items:center;gap:14px;text-align:left;font-family:var(--sans);font-weight:600;font-size:1.02rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 18px;cursor:pointer;transition:background .35s var(--eo),color .35s,border-color .3s,transform .35s var(--es),box-shadow .35s}
+.bm-pr span{font-family:var(--mono);font-size:.78rem;font-weight:500;color:var(--teal);transition:color .3s}
+.bm-pr:hover{transform:translateX(4px);border-color:var(--teal-soft)}
+.bm-pr.on{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 16px 34px -18px rgba(15,20,22,.6)}
+.bm-pr.on span{color:var(--teal-light)}
+.bm-pdet{position:relative;border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:var(--shadow-md);overflow:hidden;min-height:320px}
+.bm-pd{position:absolute;inset:0;padding:34px 36px;opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity .45s var(--eo),transform .55s var(--eo),filter .45s;pointer-events:none}
+.bm-pd.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.bm-pq{font-family:var(--serif);font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1.22;color:var(--ink);margin-bottom:20px}
+.bm-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.bm-tags span{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);border:1px solid var(--teal-soft);border-radius:999px;padding:7px 13px}
+.bm-pb{font-size:1.02rem;line-height:1.6;color:var(--ink-2);max-width:56ch}
+/* referral channels */
+.bm-chs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:6px}
+.bm-ch{display:flex;flex-direction:column;align-items:center;gap:12px;padding:22px 12px;border-radius:18px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.02));color:rgba(255,255,255,.85);font-family:var(--sans);font-weight:600;font-size:.96rem;cursor:pointer;transition:transform .4s var(--es),background .4s var(--eo),border-color .3s,color .3s,box-shadow .4s}
+.bm-ch i{width:34px;height:34px;color:var(--gold-soft);transition:color .3s,transform .5s var(--es)}
+.bm-ch i svg{width:100%;height:100%}
+.bm-ch:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.32)}
+.bm-ch:hover i{transform:scale(1.1)}
+.bm-ch.on{background:linear-gradient(150deg,var(--teal-light),var(--teal));color:var(--ink);border-color:transparent;box-shadow:0 20px 44px -22px rgba(39,176,188,.7)}
+.bm-ch.on i{color:var(--ink)}
+.bm-cds{position:relative;margin-top:16px;min-height:66px}
+.bm-cd{position:absolute;inset:0;margin:0;display:flex;align-items:center;padding:16px 22px;border-left:3px solid var(--gold-brand);background:rgba(255,255,255,.06);border-radius:0 14px 14px 0;font-size:1.02rem;line-height:1.5;color:rgba(255,255,255,.85);opacity:0;transform:translateY(8px);transition:opacity .4s var(--eo),transform .5s var(--eo);pointer-events:none}
+.bm-cd b{color:#fff;margin-right:6px}
+.bm-cd.on{opacity:1;transform:none;pointer-events:auto}
+/* P3 for branches */
+.bp3-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 18px}
+.bp3-tabs button{font-family:var(--sans);font-weight:500;font-size:.9rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line-strong);border-radius:999px;padding:8px 16px;cursor:pointer;transition:all .3s var(--eo)}
+.bp3-tabs button:hover{border-color:var(--teal);color:var(--ink)}
+.bp3-tabs button.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 10px 22px -12px rgba(0,129,139,.7)}
+.bp3-card{display:grid;grid-template-columns:minmax(220px,.62fr) 1.38fr;gap:34px;align-items:center;border:1px solid var(--line);border-radius:24px;background:var(--surface);padding:22px;box-shadow:var(--shadow-md)}
+.bp3-img{border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:var(--bg);box-shadow:0 22px 50px -26px rgba(15,20,22,.5)}
+.bp3-img img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .3s var(--eo),transform .5s var(--eo)}
+.bp3-body{transition:opacity .3s var(--eo),transform .45s var(--eo),filter .3s}
+.bp3-card.swap .bp3-body{opacity:0;transform:translateX(12px);filter:blur(4px)}
+.bp3-card.swap .bp3-img img{opacity:0;transform:scale(.97)}
+.bp3-who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.bp3-who b{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,2.4vw,2.1rem);color:var(--ink)}
+.bp3-who span{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;color:var(--muted)}
+.bp3-q{font-family:var(--serif);font-style:italic;font-size:1.12rem;line-height:1.5;color:var(--ink-2);margin:12px 0 16px;border-left:3px solid var(--gold-brand);padding-left:14px}
+.bp3-match{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.bp3-match span{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bp3-match b{font-size:1.04rem;font-weight:500;line-height:1.5;color:var(--ink)}
+.bp3-ask{font-weight:700;font-size:1.04rem;color:var(--teal);margin-bottom:2px}
+/* branch economics */
+.bme{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px}
+.bme-in{border-radius:22px;background:var(--surface);padding:26px 28px;box-shadow:0 26px 60px -30px rgba(0,0,0,.5)}
+.bme-in label{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px}
+.bme-in label:first-child{margin-top:0}
+.bme-f{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line-strong);border-radius:14px;background:var(--bg);padding:0 16px;transition:border-color .25s,box-shadow .25s}
+.bme-f:focus-within{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.bme-f span{font-family:var(--mono);color:var(--muted)}
+.bme-f input{flex:1;min-width:0;border:none;background:transparent;font-family:var(--mono);font-size:1.35rem;color:var(--ink);padding:13px 0;outline:none}
+.bme-out{position:relative;overflow:hidden;border-radius:22px;padding:30px 32px;background:linear-gradient(150deg,var(--teal-light) 0%,#1E9AA5 55%,var(--teal) 100%);color:var(--ink);display:flex;flex-direction:column;justify-content:center;box-shadow:0 30px 70px -32px rgba(39,176,188,.65)}
+.bme-out::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);pointer-events:none}
+.bme-k{font-family:var(--mono);font-weight:600;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(15,20,22,.75)}
+.bme-big{font-family:var(--serif);font-size:clamp(3rem,6vw,4.6rem);line-height:1;margin:10px 0 12px;color:var(--ink);font-variant-numeric:tabular-nums}
+.bme-line{font-size:1.02rem;line-height:1.5;color:rgba(15,20,22,.85);margin-bottom:20px}
+.bme-bars{display:grid;gap:10px}
+.bme-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;font-size:.82rem;color:rgba(15,20,22,.8)}
+.bme-row>span{white-space:nowrap;min-width:150px}
+.bme-row b{font-family:var(--mono);font-size:.86rem;color:var(--ink);min-width:86px;text-align:right}
+.bme-track{height:10px;border-radius:5px;background:rgba(15,20,22,.12);overflow:hidden}
+.bme-track i{display:block;height:100%;width:0;border-radius:5px;background:rgba(15,20,22,.45);transition:width .8s var(--eo)}
+.bme-row.pm .bme-track i{background:var(--ink)}
+.bme-note{margin-top:14px;font-size:.78rem;line-height:1.5;color:rgba(255,255,255,.7)}
+@media(max-width:980px){.bm-chs{grid-template-columns:repeat(3,1fr)}.bme-row{grid-template-columns:1fr auto;}.bme-row .bme-track{grid-column:1/-1;grid-row:2}}
+@media(max-width:860px){
+  .bm-prio,.bp3-card,.bme{grid-template-columns:1fr}
+  .bm-pdet{min-height:300px}
+  .bp3-img{max-width:280px}
+}
+@media(max-width:560px){.bm-chs{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.bm-pd,.bm-cd,.bp3-body,.bp3-img img,.bme-track i{transition:none!important}}
+
+
+/* ===== v15: talk track + branch spec polish ===== */
+.chrome .ttbtn{width:auto;padding:0 13px;font-family:var(--mono);font-weight:500;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.chrome .ttbtn:hover{border-color:var(--teal);color:var(--teal)}
+.chrome .ttbtn.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.ttpanel{position:fixed;right:24px;bottom:72px;z-index:70;width:min(440px,calc(100vw - 32px));background:#0B1A1E;color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px 20px 20px;box-shadow:0 34px 80px -30px rgba(0,0,0,.75);opacity:0;transform:translateY(14px) scale(.98);pointer-events:none;transition:opacity .3s var(--eo),transform .45s var(--es)}
+.ttpanel.show{opacity:1;transform:none;pointer-events:auto}
+.tt-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.tt-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
+.tt-x{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.75);font-size:1rem;line-height:1;cursor:pointer;transition:.2s}
+.tt-x:hover{background:rgba(255,255,255,.1);color:#fff}
+.tt-t{font-family:var(--serif);font-size:1.15rem;color:#fff;margin-bottom:8px}
+.tt-b{font-size:.94rem;line-height:1.62;color:rgba(255,255,255,.86)}
+.bm-aqua em{color:var(--teal-light)!important}
+.bm-prio{margin-top:26px}
+@media(max-width:1180px){.chrome .ttbtn{padding:0 9px;font-size:.58rem}}
+@media(prefers-reduced-motion:reduce){.ttpanel{transition:none}}
+
+/* ===== v15b: phones ===== */
+@media(max-width:760px){
+  .arrow{display:flex!important;top:auto;bottom:14px;transform:none;width:50px;height:50px;font-size:1.5rem;box-shadow:0 10px 26px -10px rgba(15,20,22,.45)}
+  .arrow:hover:not(:disabled){transform:scale(1.05)}
+  .arrow.left{left:14px}.arrow.right{right:14px}
+  .slide{padding-bottom:84px}
+  .ttpanel{right:12px;left:12px;width:auto;bottom:76px}
+}
+.bme>*{min-width:0}
+.bme-f input{width:100%}
+@media(max-width:560px){
+  .bme-in,.bme-out{padding:22px 20px}
+  .bme-row{grid-template-columns:1fr auto}
+  .bme-row>span{min-width:0;white-space:normal}
+  .bme-row .bme-track{grid-column:1/-1;grid-row:2}
+  .bp3-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .bp3-tabs button{flex:none}
+}
+
+/* ===== v15c: phone top bar ===== */
+@media(max-width:760px){.hint{display:none!important}}
+@media(max-width:560px){
+  .chrome{gap:6px;padding:0 10px}
+  .chrome .deckswitch{margin-right:2px;padding:2px}
+  .chrome .dsb{padding:5px 7px;font-size:.5rem;letter-spacing:.04em}
+  .chrome .count{font-size:.62rem}
+  .chrome .ttbtn{font-size:0;padding:0 9px;margin-right:2px!important}
+  .chrome .ttbtn::before{content:'Notes';font-size:.54rem;letter-spacing:.06em}
+  .chrome .gridbtn{width:32px;height:32px}
+  .chrome #editbtn{display:none}
+  .chrome #savebtn{margin-right:2px!important}
+  .chrome #homebtn{margin-right:2px!important}
+}
+
+@media(max-width:440px){
+  .chrome{gap:5px;padding:0 8px}
+  .chrome #savebtn{display:none}
+  .chrome .dsb{padding:5px 6px}
+}
+@media(max-width:400px){.chrome .brand{display:none}}
 </style>
 </head>
 <body>
@@ -1662,6 +1805,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   </div>
   <span class="pzchip" id="pz-chip" style="display:none"><i></i><span id="pz-chip-t"></span></span>
   <span class="count" id="count">01 / 18</span>
+  <button class="gridbtn ttbtn" id="ttbtn" type="button" style="display:none;margin-right:6px" aria-label="Talk track (N)" title="Talk track (N)">Talk track</button>
   <button class="gridbtn savebtn" id="savebtn" title="Save &amp; get shareable link" aria-label="Save this presentation" style="margin-right:6px">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="m7 9 5-5 5 5"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg><span class="sl">Save</span>
   </button>
@@ -2478,6 +2622,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
         <span class="eyebrow" data-reveal>One idea became five growth channels</span>
         <h2 class="head" data-reveal>AI that helps create <em>real relationships.</em></h2>
         <p class="nw-p" data-reveal>It started with Realtor Radar. Then our people asked: &ldquo;What about the other professionals our clients already trust?&rdquo; So we built those too.</p>
+        <div class="rj-chips light" data-reveal><span class="rj-chip">Realtors</span><span class="rj-chip">Financial advisors</span><span class="rj-chip">CPAs</span><span class="rj-chip">Divorce attorneys</span><span class="rj-chip">Trust attorneys</span></div>
       </div>
       <div class="nw-radar" data-reveal aria-hidden="true">
         <i class="r" style="--in:12%"></i><i class="r" style="--in:26%"></i><i class="r" style="--in:40%"></i>
@@ -2615,9 +2760,232 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   </div>
 </section>
 
+
+<!-- BM 1 HOME -->
+<section class="slide bg-teal" data-deck="bm" data-title="The branch you built" data-notes="Begin with discovery, not the deck. Tell them you want to understand the branch, the people and what they want next. Do not advance until you can name the two or three priorities that matter most to them." data-sec="Home" style="display:none">
+  <div class="orbs"><div class="orb a"></div><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" id="bm-eye" data-reveal>Your branch &middot; Your people &middot; Your next chapter</span>
+    <h1 class="display" id="bm-hero" data-reveal>You&rsquo;ve built more than production.<br><em>You&rsquo;ve built a branch.</em></h1>
+    <p class="lede" data-reveal>Before we talk about Partners, let&rsquo;s talk about what you&rsquo;ve built, what your team needs and what an incredible next twelve months would look like.</p>
+    <div class="statgrid" data-reveal>
+      <div class="s"><div class="n">1988</div><div class="l">Founded</div></div>
+      <div class="s"><div class="n" data-count="200" data-suffix="+">200+</div><div class="l">Lender network</div></div>
+      <div class="s"><div class="n">1099</div><div class="l">Flexibility</div></div>
+      <div class="s"><div class="n">&infin;</div><div class="l">No commission cap</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 2 DISCOVER -->
+<section class="slide bg-light" data-deck="bm" data-title="Your branch story" data-notes="Use these prompts conversationally. You do not need to ask every question. Listen for the gap between the branch they have and the branch they want. Pay special attention to their responsibility for the team." data-sec="Discover" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Discovery</span>
+    <h2 class="head" data-reveal>Let&rsquo;s start with <em>your branch.</em></h2>
+    <div class="nw-qs bm-disc" data-reveal><button class="nw-q" type="button"><b>01</b><h4>How you got here</h4><p>Tell me about your mortgage story and how this branch came together.</p></button><button class="nw-q" type="button"><b>02</b><h4>Your team</h4><p>Who are the key people, and what makes them stay?</p></button><button class="nw-q" type="button"><b>03</b><h4>Twelve months from now</h4><p>What would an incredible year look like for the entire branch?</p></button><button class="nw-q" type="button"><b>04</b><h4>The constraint</h4><p>What keeps the branch from growing the way you want?</p></button><button class="nw-q" type="button"><b>05</b><h4>The responsibility</h4><p>What would your people need to see before you could consider a move?</p></button><button class="nw-q" type="button"><b>06</b><h4>The priority</h4><p>Which change would create the biggest difference for the branch?</p></button></div>
+    <div class="nw-hintline" data-reveal>Tap a question as you cover it</div>
+  </div>
+</section>
+
+<!-- BM 3 PRIORITIES -->
+<section class="slide bg-light" data-deck="bm" data-title="Branch priorities" data-notes="This is the presentation hub. Ask the Branch Manager to select the two or three priorities that matter most. Click each relevant priority and respond to what they told you. Skip what does not matter." data-sec="Priorities" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Built around what branches need</span>
+    <h2 class="head" data-reveal>What matters most <em>to your branch?</em></h2>
+    <div class="bm-prio" id="bm-prio" data-reveal>
+      <div class="bm-plist"><button type="button" class="bm-pr on" data-i="0"><span>01</span>Keep and grow the team</button><button type="button" class="bm-pr" data-i="1"><span>02</span>Branch economics</button><button type="button" class="bm-pr" data-i="2"><span>03</span>Reliable operations</button><button type="button" class="bm-pr" data-i="3"><span>04</span>Products and pricing</button><button type="button" class="bm-pr" data-i="4"><span>05</span>Autonomy and access</button><button type="button" class="bm-pr" data-i="5"><span>06</span>A branch growth engine</button><button type="button" class="bm-pr" data-i="6"><span>07</span>A safe transition</button></div>
+      <div class="bm-pdet"><div class="bm-pd on" data-i="0"><p class="bm-pq">&ldquo;My best people have to believe this makes their business better.&rdquo;</p><div class="bm-tags"><span>LO flexibility</span><span>Recruiting support</span><span>P&sup3; proof</span></div><p class="bm-pb">Give each producer a clearer reason to stay, grow and help attract the next strong LO.</p></div><div class="bm-pd" data-i="1"><p class="bm-pq">&ldquo;I want to understand what the branch truly keeps.&rdquo;</p><div class="bm-tags"><span>Actual production</span><span>Transparent pricing</span><span>Clear expenses</span></div><p class="bm-pb">Compare the current platform with Partners using real branch production, overrides, compensation and expenses.</p></div><div class="bm-pd" data-i="2"><p class="bm-pq">&ldquo;I cannot spend every day solving file problems for the team.&rdquo;</p><div class="bm-tags"><span>Processing pod</span><span>ARIVE</span><span>Partner Liaison</span></div><p class="bm-pb">Clear ownership gives the manager visibility while operational support keeps the team focused on relationships.</p></div><div class="bm-pd" data-i="3"><p class="bm-pq">&ldquo;My producers need more ways to win the right loans.&rdquo;</p><div class="bm-tags"><span>200+ lenders</span><span>Bank or broker</span><span>Scenario review</span></div><p class="bm-pb">Each LO can use the execution path and lender access that best fit the borrower and transaction.</p></div><div class="bm-pd" data-i="4"><p class="bm-pq">&ldquo;I want room to lead, with help when the branch needs a decision.&rdquo;</p><div class="bm-tags"><span>Direct access</span><span>Branch leadership</span><span>Fast answers</span></div><p class="bm-pb">Protect the culture you built while gaining direct access to leaders who understand production.</p></div><div class="bm-pd" data-i="5"><p class="bm-pq">&ldquo;I want systems that help the whole team create more business.&rdquo;</p><div class="bm-tags"><span>Referral Radar</span><span>Marketing studios</span><span>WWN</span></div><p class="bm-pb">Use practical AI, marketing and peer learning to help every LO create stronger referral conversations.</p></div><div class="bm-pd" data-i="6"><p class="bm-pq">&ldquo;I need to know my people and pipeline will be protected.&rdquo;</p><div class="bm-tags"><span>Rachael</span><span>Named owners</span><span>Transition plan</span></div><p class="bm-pb">Build the move around active files, licenses, people and timing so the branch always knows what happens next.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 4 PETER -->
+<section class="slide bg-ink" data-deck="bm" data-title="Why WWN began" data-notes="Ask, “Do you know Tony Robbins?” Pause for the answer. Let the laugh happen after “annoyingly positive.” Then explain that you wanted to focus on people who were succeeding in a difficult market." data-sec="Peter&rsquo;s Story" style="display:none">
+  <div class="orbs"><div class="orb a"></div></div>
+  <div class="wrap">
+    <div class="nw-peter">
+      <div class="nw-ph" data-reveal>
+        <img src="https://www.partnersmortgage.com/wp-content/uploads/2024/09/1670890495065.jpeg" alt="Peter Schwartz" referrerpolicy="no-referrer" decoding="async" loading="eager" onerror="if(!this.dataset.r){this.dataset.r=1;var s=this.src;this.src='';this.src=s;}else{this.style.display='none';}">
+        <div class="nw-phtag"><b>Peter Schwartz</b><span>EVP of Business Development</span></div>
+      </div>
+      <div>
+        <span class="eyebrow" data-reveal>Why What&rsquo;s Working Now began</span>
+        <h2 class="head" data-reveal>&ldquo;Do you know <em>Tony Robbins?</em>&rdquo;</h2>
+        <p class="nw-p" data-reveal>Before mortgage, I worked for Tony for three years. I&rsquo;m annoyingly positive, and I got tired of all the negativity about the &ldquo;down market.&rdquo;</p>
+        <p class="nw-pull bm-aqua" data-reveal>So I started asking people who were crushing it: <em>What&rsquo;s working now?</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 5 CONVERSATIONS -->
+<section class="slide bg-teal" data-deck="bm" data-title="Conversations become tools" data-notes="Explain the evolution in Peter’s voice. WWN captured successful strategies. The personal stories became P³. One top producer’s method sparked Realtor Radar. Team feedback expanded it into five channels. Land on how one useful idea can benefit an entire branch." data-sec="Peter&rsquo;s Story" style="display:none">
+  <div class="orbs"><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>How Partners learns and builds</span>
+    <h2 class="head" data-reveal>Conversations become <em>growth tools.</em></h2>
+    <div class="nw-flow" data-reveal><div class="nw-fs"><div class="nw-fn">01</div><h4>WWN</h4><p>Successful people share what is working right now.</p></div><div class="nw-fs"><div class="nw-fn">02</div><h4>P&sup3;</h4><p>Partners People Profiles reveal the stories behind the success.</p></div><div class="nw-fs"><div class="nw-fn">03</div><h4>Realtor Radar</h4><p>A top producer&rsquo;s strategy becomes a practical AI tool.</p></div><div class="nw-fs"><div class="nw-fn">04</div><h4>Five channels</h4><p>Our team asks for more. Partners builds them.</p></div></div>
+    <p class="nw-tagline" data-reveal>One useful conversation can become a growth tool <em>for an entire branch.</em></p>
+  </div>
+</section>
+
+<!-- BM 6 CHANNELS -->
+<section class="slide bg-ink" data-deck="bm" data-title="Five referral channels" data-notes="Show this in every conversation. Click the channel most relevant to the prospect. Ask which channel would create the biggest opportunity in their market." data-sec="Growth Tools" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>One idea became five growth channels</span>
+    <h2 class="head" data-reveal>AI that helps create <em>real relationships.</em></h2>
+    <p class="nw-p" data-reveal>It started with Realtor Radar. Then our people asked: &ldquo;What about the other professionals our clients already trust?&rdquo; So we built those too.</p>
+    <div class="bm-chs" id="bm-chs" data-reveal><button type="button" class="bm-ch on" data-i="0"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></i><span>Realtors</span></button><button type="button" class="bm-ch" data-i="1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 16l5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></i><span>Financial advisors</span></button><button type="button" class="bm-ch" data-i="2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></i><span>CPAs</span></button><button type="button" class="bm-ch" data-i="3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></i><span>Divorce attorneys</span></button><button type="button" class="bm-ch" data-i="4"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h11v14a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-1h11v1a3 3 0 0 0 3 3"/><path d="M8 3a3 3 0 0 0-3 3v10"/><path d="M10 8h6M10 12h6"/></svg></i><span>Trust attorneys</span></button></div>
+    <div class="bm-cds" data-reveal><p class="bm-cd on" data-i="0"><b>Realtors:</b> Find better-fit Realtor conversations and prepare outreach around their business.</p><p class="bm-cd" data-i="1"><b>Financial advisors:</b> Identify professionals whose clients may benefit from coordinated mortgage guidance.</p><p class="bm-cd" data-i="2"><b>CPAs:</b> Build relationships around planning moments where mortgage strategy may matter.</p><p class="bm-cd" data-i="3"><b>Divorce attorneys:</b> Create thoughtful professional connections around housing transitions.</p><p class="bm-cd" data-i="4"><b>Trust attorneys:</b> Support estate and family-planning conversations where real estate is part of the picture.</p></div>
+  </div>
+</section>
+
+<!-- BM 7 TOOLS -->
+<section class="slide bg-light" data-deck="bm" data-title="Tools across the branch" data-notes="Do not list every tool mechanically. Tie the platform to adoption across the team. Show how one manager can give every LO a stronger system for referral outreach, marketing, recruiting and client conversations." data-sec="Growth Tools" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Technology and marketing across the team</span>
+    <h2 class="head" data-reveal>Give every LO a stronger <em>starting point.</em></h2>
+    <div class="nw-tools" data-reveal>
+      <div class="nw-tool"><div class="rj-k">AI &middot; Referral</div><h4>Referral <em>Radar</em></h4><p>Help the team prepare smarter outreach across five professional referral channels.</p></div>
+      <a class="nw-tool link" id="bm-flyer" data-base="https://flyers.partnersmortgage.com" href="https://flyers.partnersmortgage.com" target="_blank" rel="noopener noreferrer"><div class="rj-k">Live studio</div><h4>Flyer <em>Studio</em></h4><p>Give every LO fast access to co-branded listing materials and program flyers.</p><span class="nw-go">Open the live studio <span class="ar">&rarr;</span></span></a>
+      <a class="nw-tool link" id="bm-social" data-base="https://social.partnersmortgage.com" href="https://social.partnersmortgage.com" target="_blank" rel="noopener noreferrer"><div class="rj-k">Live studio</div><h4>Social <em>Studio</em></h4><p>Support consistent visibility with approved content and social resources.</p><span class="nw-go">Open the live studio <span class="ar">&rarr;</span></span></a>
+      <div class="nw-tool"><div class="rj-k">AI &middot; Documents</div><h4>Loan <em>Lens</em></h4><p>Help originators review borrower documents with investor overlays built in.</p></div>
+      <div class="nw-tool"><div class="rj-k">For managers</div><h4>Branch <em>recruiting support</em></h4><p>Peter and PIA help build your LO pipeline with targeted outreach, relevant P&sup3; stories, and consistent follow-up.</p></div>
+      <div class="nw-tool feat"><div class="rj-k">Per producer</div><h4>$<span data-count="175">175</span> <em>Foundation</em></h4><p>One straightforward technology and marketing foundation for each producer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 8 OPERATIONS -->
+<section class="slide bg-ink" data-deck="bm" data-title="Operational support" data-notes="Use this slide when the Branch Manager mentions files, service, turn times, communication or the burden of solving every operational problem. Ask what the manager could accomplish with reliable support across the branch." data-sec="How Partners Helps" style="display:none">
+  <div class="orbs"><div class="orb a"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Reliable operations</span>
+    <h2 class="head" data-reveal>Lead the branch. <em>Your support team carries the file.</em></h2>
+    <p class="nw-p" data-reveal>A production manager, LOA and processor work the pipeline. A dedicated Partner Liaison helps the manager remove friction across the team.</p>
+    <div class="rj-chips light nw-pod" data-reveal><span class="rj-chip">Production Manager</span><span class="rj-chip">LOA</span><span class="rj-chip">Processor</span><span class="rj-chip">Partner Liaison</span></div>
+    <div class="rj-grid three" data-reveal>
+      <div class="rj-card"><div class="rj-k">Clear ownership</div><p>Defined roles keep files moving and give the manager visibility into every handoff.</p></div>
+      <div class="rj-card"><div class="rj-k">ARIVE</div><p>One loan operating system for files, documents, conditions and communication.</p></div>
+      <div class="rj-card"><div class="rj-k">Branch transition</div><p>A coordinated plan helps protect active production while the team moves.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 9 MORE WAYS -->
+<section class="slide bg-light" data-deck="bm" data-title="Product flexibility" data-notes="Use this when products, pricing, autonomy or retaining top producers comes up. Do not promise that Partners wins every scenario. Emphasize that individual LOs can choose the structure that best serves the client." data-sec="How Partners Helps" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Bank when banking wins &middot; Broker when brokering wins</span>
+    <h2 class="head" data-reveal>More ways to solve <em>the right problem.</em></h2>
+    <div class="rj-stats" data-reveal>
+      <div class="rj-stat hl"><div class="rj-sk">Lender network</div><div class="rj-sv"><span data-count="200">200</span>+</div><p>Broader access gives the branch more ways to serve borrowers and protect relationships.</p></div>
+      <div class="rj-stat"><div class="rj-sk">Modern bank model</div><div class="rj-sv nw-sv">Bank <em>or</em> broker</div><p>Each LO can choose the execution path that best fits the client and the loan.</p></div>
+      <div class="rj-stat"><div class="rj-sk">Transparent economics</div><div class="rj-sv nw-sv">Your <em>numbers</em></div><p>Evaluate pricing, compensation and expenses using the branch&rsquo;s actual production.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 10 LEADERSHIP -->
+<section class="slide bg-ink" data-deck="bm" data-title="Leadership and autonomy" data-notes="Use this when the prospect values accessibility, stability, trust, autonomy or protecting the culture they built. Lead with how leadership behaves and how that affects the manager and team." data-sec="How Partners Helps" style="display:none">
+  <div class="orbs"><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Leadership that serves</span>
+    <h2 class="head" data-reveal>You have access to the people <em>who can make things happen.</em></h2>
+    <div class="nw-lead" data-reveal>
+      <div class="nw-lc"><div class="nw-li"><span>DT</span><img src="https://www.partnersmortgage.com/wp-content/uploads/2025/06/Trinidad.Dan2_-e1750190261630.jpg" alt="Dan Trinidad" referrerpolicy="no-referrer" decoding="async" loading="eager" onerror="if(!this.dataset.r){this.dataset.r=1;var s=this.src;this.src='';this.src=s;}else{this.style.display='none';}"></div><h4>Dan Trinidad</h4><div class="nw-lr">Founder &amp; CEO</div><p>Partners has operated from the belief that every person matters since 1988.</p></div>
+      <div class="nw-lc"><div class="nw-li"><span>LB</span><img src="https://www.partnersmortgage.com/wp-content/uploads/2024/09/Leif-Boyd-Headshot.jpeg" alt="Leif Boyd" referrerpolicy="no-referrer" decoding="async" loading="eager" onerror="if(!this.dataset.r){this.dataset.r=1;var s=this.src;this.src='';this.src=s;}else{this.style.display='none';}"></div><h4>Leif Boyd</h4><div class="nw-lr">President</div><p>Servant leader who gives managers access when the branch needs a decision.</p></div>
+      <div class="nw-lc hl"><div class="nw-li"><span>PS</span><img src="https://www.partnersmortgage.com/wp-content/uploads/2024/09/1670890495065.jpeg" alt="Peter Schwartz" referrerpolicy="no-referrer" decoding="async" loading="eager" onerror="if(!this.dataset.r){this.dataset.r=1;var s=this.src;this.src='';this.src=s;}else{this.style.display='none';}"></div><h4>Peter Schwartz</h4><div class="nw-lr">Your first call</div><p>Personally involved from the first conversation through the branch transition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 11 PROOF -->
+<section class="slide bg-light" data-deck="bm" data-title="What your team may ask" data-notes="Choose the P³ profile that best matches the manager or a concern their team may have. Matt Von Bergen is the strongest starting point for a scalable platform and preserved brand identity. Show one relevant story, then ask what would matter most to their people." data-sec="Proof" id="slide-bp3" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Partners People Profiles &middot; P&sup3;</span>
+    <h2 class="head" data-reveal>Stories your team can <em>evaluate for themselves.</em></h2>
+    <div class="bp3-tabs" id="bp3-tabs" data-reveal><button type="button" data-i="0" class="on" data-name="Matt Von Bergen" data-nmls="NMLS 209736" data-match="A scalable platform with strong operations and preserved brand identity.">Matt Von Bergen</button><button type="button" data-i="1" data-name="Jeff Glass" data-nmls="NMLS# 202143" data-match="Collaboration and solving problems together.">Jeff Glass</button><button type="button" data-i="2" data-name="Joel Morgan" data-nmls="NMLS# 220222" data-match="Freedom and authority to make decisions that get deals done.">Joel Morgan</button><button type="button" data-i="3" data-name="Rob Garcia" data-nmls="NMLS 2378922" data-match="Honest, transparent leadership and a place to build a career.">Rob Garcia</button><button type="button" data-i="4" data-name="Elvin Estela" data-nmls="NMLS 1752169" data-match="Pricing, flexibility and support to compete with confidence.">Elvin Estela</button><button type="button" data-i="5" data-name="Erik Papke" data-nmls="NMLS 255178" data-match="Less paperwork, strong support and leadership integrity.">Erik Papke</button><button type="button" data-i="6" data-name="Craig Warn" data-nmls="NMLS 196059" data-match="Leadership support, marketing resources and AI tools.">Craig Warn</button><button type="button" data-i="7" data-name="Sierra Schutte" data-nmls="NMLS 2571466" data-match="A healthier, values-driven culture with flexibility and opportunity.">Sierra Schutte</button><button type="button" data-i="8" data-name="Jay Posey" data-nmls="NMLS 149065" data-match="Pricing flexibility, trusted leadership and independence.">Jay Posey</button></div>
+    <div class="bp3-card" id="bp3-card" data-reveal>
+      <div class="bp3-img"><img id="bp3-img" alt="Loan Officer Spotlight"></div>
+      <div class="bp3-body">
+        <div class="bp3-who"><b id="bp3-name">Matt Von Bergen</b><span id="bp3-nmls">NMLS 209736</span></div>
+        <p class="bp3-q" id="bp3-q">I saw a platform that could help me scale with stronger operations, processing, great LOS, and back-office support while preserving my brand identity.</p>
+        <div class="bp3-match"><span>Best match when the prospect values</span><b id="bp3-match">A scalable platform with strong operations and preserved brand identity.</b></div>
+        <p class="bp3-ask">Ask: &ldquo;What part of that story resonates with you?&rdquo;</p>
+        <div class="nw-p3-ctl"><button type="button" id="bp3-prev" aria-label="Previous profile">&lsaquo;</button><button type="button" id="bp3-next" aria-label="Next profile">&rsaquo;</button><span class="ct" id="bp3-ct">01 / 09</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BM 12 ECONOMICS -->
+<section class="slide bg-teal" data-deck="bm" data-title="Branch economics" data-notes="Use this only after there is genuine interest. This is an illustration, not an offer. Confirm what their current number represents—including overrides and branch expenses—before comparing it with Partners." data-sec="Economics" id="slide-bmecon" style="display:none">
+  <div class="orbs"><div class="orb a"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>A branch-level comparison</span>
+    <h2 class="head" data-reveal>What could the branch keep on <em>the production it already has?</em></h2>
+    <div class="bme" data-reveal>
+      <div class="bme-in">
+        <label for="bm-prod">Average monthly branch production</label>
+        <div class="bme-f"><span>$</span><input type="text" id="bm-prod" inputmode="numeric" value="10,000,000"></div>
+        <label for="bm-cur">Current branch net basis points</label>
+        <div class="bme-f"><input type="number" id="bm-cur" inputmode="decimal" value="20" step="1"><span class="u">bps</span></div>
+        <label for="bm-pm">Illustrative Partners branch net basis points</label>
+        <div class="bme-f"><input type="number" id="bm-pm" inputmode="decimal" value="30" step="1"><span class="u">bps</span></div>
+      </div>
+      <div class="bme-out">
+        <div class="bme-k">Illustrative annual difference</div>
+        <div class="bme-big" id="bm-annual">$120,000</div>
+        <p class="bme-line" id="bm-line">At the same production, a 10 bps difference equals $10,000 per month.</p>
+        <div class="bme-bars">
+          <div class="bme-row"><span>Current branch net / mo</span><div class="bme-track"><i id="bm-bar-cur"></i></div><b id="bm-v-cur">$20,000</b></div>
+          <div class="bme-row pm"><span>Partners illustrative / mo</span><div class="bme-track"><i id="bm-bar-pm"></i></div><b id="bm-v-pm">$30,000</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="bme-note" data-reveal>Illustration only. Final branch and LO economics depend on approved compensation plans, production, product mix, expenses and applicable requirements.</p>
+  </div>
+</section>
+
+<!-- BM 13 TRANSITION -->
+<section class="slide bg-light" data-deck="bm" data-title="A plan for the whole branch" data-notes="This is the moment to introduce Rachael. The manager needs to know the move will be coordinated around active production and individual people—not treated as a bulk transfer." data-sec="Transition" style="display:none">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Rachael &middot; Onboarding and air traffic controller</span>
+    <h2 class="head" data-reveal>You lead your people. <em>We coordinate the move.</em></h2>
+    <div class="rj-grid three" data-reveal>
+      <div class="rj-card"><div class="nw-cn">01</div><div class="rj-k">Map the branch</div><p>Active pipeline, licenses, key people, systems and the target start date.</p></div>
+      <div class="rj-card"><div class="nw-cn">02</div><div class="rj-k">Protect production</div><p>Create coverage for new opportunities and keep borrower communication visible.</p></div>
+      <div class="rj-card"><div class="nw-cn">03</div><div class="rj-k">Move with owners</div><p>Every handoff has a named person, a status and a clear next step.</p></div>
+    </div>
+    <p class="nw-tagline" data-reveal>We&rsquo;ve done this before. We&rsquo;ve got this. <em>We&rsquo;ll build a plan for your branch.</em></p>
+  </div>
+</section>
+
+<!-- BM 14 NEXT STEP -->
+<section class="slide bg-teal" data-deck="bm" data-title="Your branch opportunity review" data-notes="Do not end with “I’ll send something.” Secure the next commitment while you are together. The strongest next step is a confidential branch review using their actual production, team structure and live scenarios." data-sec="Next Step" style="display:none">
+  <div class="orbs"><div class="orb a"></div><div class="orb b"></div></div>
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>The next useful step</span>
+    <h2 class="head" data-reveal>Build the opportunity around <em>your actual branch.</em></h2>
+    <div class="rj-grid three" data-reveal>
+      <div class="rj-card"><div class="nw-cn">01</div><div class="rj-k">Model the economics</div><p>Compare branch and LO compensation using actual production and expenses.</p></div>
+      <div class="rj-card"><div class="nw-cn">02</div><div class="rj-k">Price live scenarios</div><p>Run one or two loans to see where the bank and broker options compete.</p></div>
+      <div class="rj-card"><div class="nw-cn">03</div><div class="rj-k">Build the transition</div><p>Meet Leif and Rachael, identify the key people and map the next steps.</p></div>
+    </div>
+    <p class="nw-ask" data-reveal>&ldquo;Would a confidential branch opportunity review be worth <em>the next conversation?</em>&rdquo;</p>
+    <div class="contact" data-reveal>
+      <div class="cc"><div class="ico">📞</div><div class="ch">Phone</div><div class="cv">(916) 770-0053</div></div>
+      <div class="cc"><div class="ico">✉️</div><div class="ch">Email</div><div class="cv">peter@partnersmortgage.com</div></div>
+      <div class="cc"><div class="ico">📍</div><div class="ch">Headquarters</div><div class="cv">1687 Eureka Road, Suite 100<br>Roseville, CA 95661</div></div>
+    </div>
+    <div style="text-align:center"><a class="cta" id="cta-call3" style="display:none" data-reveal href="mailto:peter@partnersmortgage.com?cc=aboyd@partnersmortgage.com&subject=Branch%20Opportunity%20Review%20%E2%80%94%20Partners%20Mortgage">Book a Discovery Call <span class="ar">&rarr;</span></a></div>
+    <p style="margin-top:26px;font-size:.66rem;color:rgba(255,255,255,.55);line-height:1.55;text-align:center;font-family:var(--mono)">The Turnkey Foundation Inc. DBA Partners Mortgage. NMLS #1025894. For licensing information visit nmlsconsumeraccess.org. Equal Housing Lender.</p>
+  </div>
+</section>
+
 </div><!-- /deck -->
 
-<div class="hint" id="hint"><span class="k">&larr;</span><span class="k">&rarr;</span> navigate &middot; <span class="k">G</span> all slides &middot; <span class="k">F</span> fullscreen &middot; <span class="k">H</span> all tools</div>
+<div class="hint" id="hint"><span class="k">&larr;</span><span class="k">&rarr;</span> navigate &middot; <span class="k">G</span> all slides &middot; <span class="k">F</span> fullscreen</div>
 
 <div class="mode show" id="mode">
   <div class="sky"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="dots"></div><div class="vig"></div></div>
@@ -3090,6 +3458,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
         <p>Built as a dialogue &mdash; discovery questions, their priorities, P&sup3; stories, the same Leaving Money calculator, and a plan in their words.</p>
         <span class="hp-go">Use the new presentation <span class="ar">&rarr;</span></span>
       </button>
+      <button class="hpanel ice" id="vchoose-bm" type="button">
+        <span class="hp-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg></span>
+        <span class="hp-idx">03 &mdash; For branch leaders</span>
+        <div class="hp-eb">Branch Manager presentation</div>
+        <h3>The <em>Branch</em> deck</h3>
+        <p>For managers bringing a team &mdash; their branch, their people, branch-level economics and a coordinated transition.</p>
+        <span class="hp-go">Use the branch presentation <span class="ar">&rarr;</span></span>
+      </button>
     </div>
   </div>
 </div>
@@ -3236,6 +3612,8 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     <div class="pin-err" id="pin-err" role="alert"></div>
   </div>
 </div>
+
+<div class="ttpanel" id="ttpanel" role="dialog" aria-label="Peter’s talk track"><div class="tt-h"><span class="tt-k">Peter&rsquo;s talk track</span><button class="tt-x" id="tt-x" type="button" aria-label="Close">&times;</button></div><div class="tt-t" id="tt-t"></div><p class="tt-b" id="tt-b"></p></div>
 
 <div class="decksave" id="decksave">
   <div class="ds-card">
@@ -3512,6 +3890,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var s=slides[i];
     runReveals(s);
     runCountUps(s);
+    ttSync(i);
     var sec=s.getAttribute('data-sec');
     if(sec==='Leaving Money?'){
       // reset bars then refill + confetti for the payoff
@@ -3525,7 +3904,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   /* ===== dual deck: You Matter (pm) / Onboarding (rc) ===== */
   var DECK='pm';
   function applyDeckVisibility(){
-    var MAINV=(PZ&&PZ.deckv==='new')?'nw':'pm';
+    var MAINV=(PZ&&PZ.deckv==='new')?'nw':(PZ&&PZ.deckv==='bm')?'bm':'pm';
     /* the Leaving Money calculator is shared: park it in whichever deck is live */
     var money=document.getElementById('slide-money');
     var anchor=document.getElementById(MAINV==='nw'?'money-anchor-nw':'money-anchor-pm');
@@ -3535,13 +3914,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       var ds=allSlides[di], tag=ds.getAttribute('data-deck');
       if(DECK==='rc'){ ds.style.display = (tag==='rc') ? '' : 'none'; continue; }
       if(tag==='rc'){ ds.style.display='none'; }
-      else if(ds.id==='slide-money'){ ds.style.display=(PZ&&PZ.lmOn===false)?'none':''; }
+      else if(ds.id==='slide-money'){ ds.style.display=(MAINV==='bm'||(PZ&&PZ.lmOn===false))?'none':''; }
       else if(tag==='nw'){ ds.style.display=(MAINV==='nw')?'':'none'; }
-      else if(MAINV==='nw'){ ds.style.display='none'; }
+      else if(tag==='bm'){ ds.style.display=(MAINV==='bm')?'':'none'; }
+      else if(MAINV!=='pm'){ ds.style.display='none'; }
       else if(ds.id==='slide-manager'){ ds.style.display=(PZ&&PZ.mgrOn&&PZ.mgrName)?'':'none'; }
       else { ds.style.display=''; }
     }
-    var bp=el('ds-pm'); if(bp) bp.textContent=(MAINV==='nw')?'Conversation':'You Matter';
+    var bp=el('ds-pm'); if(bp) bp.textContent=(MAINV==='nw')?'Conversation':(MAINV==='bm')?'Branch Manager':'You Matter';
     rebuildSlides();
   }
   function syncDeckSwitch(){
@@ -3675,6 +4055,14 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   nextBtn.addEventListener('click',nextS);
 
   document.addEventListener('keydown',function(e){
+    /* never steal keystrokes while someone is typing (fields, the LOI's editable letter, calculator boxes) */
+    var kt=e.target, ktg=(kt&&kt.tagName)||'';
+    if(ktg==='INPUT'||ktg==='TEXTAREA'||ktg==='SELECT'||(kt&&kt.isContentEditable)) return;
+    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='Escape'){ var ttp=el('ttpanel'); if(ttp&&ttp.classList&&ttp.classList.contains('show')){ toggleTT(false); return; } }
+    /* shortcuts belong to the presentation only: not the LOI studio, offer builder, hubs or modals */
+    var kb=['loi','deckhome','decklib','vchoose','decksave','pinmodal','pubmodal'];
+    for(var ki=0;ki<kb.length;ki++){ var ke=el(kb[ki]); if(ke&&ke.classList&&ke.classList.contains('show')) return; }
     if(modeEl.classList.contains('show')||builderEl.classList.contains('show')) return;
     if(previewEl.classList.contains('show')){ if(e.key==='Escape') previewEl.classList.remove('show'); return; }
     if(setup.classList.contains('show')){ if(e.key==='Escape' && started) setup.classList.remove('show'); return; }
@@ -3687,7 +4075,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     else if(e.key==='g'||e.key==='G'){ toggleOv(); }
     else if(e.key==='f'||e.key==='F'){ toggleFs(); }
     else if(e.key==='p'||e.key==='P'){ if(!SHARED) openSetup(); }
-    else if(e.key==='h'||e.key==='H'){ if(!SHARED) deckHome(); }
+    else if(e.key==='n'||e.key==='N'){ if(!SHARED) toggleTT(); }
   });
 
   var tx=0,ty=0;
@@ -3705,7 +4093,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     ovgrid.innerHTML='';
     slides.forEach(function(s,i){
       var h=s.querySelector('h1,h2');
-      var title=h?h.textContent.replace(/\s+/g,' ').trim():('Slide '+(i+1));
+      var title=s.getAttribute('data-title')||(h?h.textContent.replace(/\s+/g,' ').trim():('Slide '+(i+1)));
       var c=document.createElement('div'); c.className='ovcard';
       c.innerHTML='<div class="ovn">'+pad(i+1)+' &middot; '+s.getAttribute('data-sec')+'</div><div class="ovt">'+title+'</div>';
       c.addEventListener('click',function(){ go(i); hideOv(); });
@@ -3755,11 +4143,28 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       }
       if(e) e.textContent=(f?('Prepared for '+f+' \u00B7 '):'')+'Your career \u00B7 Your business \u00B7 Your next chapter';
     })();
+    // branch deck: name on the opener, branch volume into the calculator
+    (function(){
+      var f=(PZ&&PZ.firstName)?PZ.firstName:'';
+      var h=el('bm-hero'), e=el('bm-eye');
+      if(h && h.appendChild){
+        while(h.firstChild) h.removeChild(h.firstChild);
+        h.appendChild(document.createTextNode(f?(f+', you\u2019ve built more than production. '):'You\u2019ve built more than production. '));
+        h.appendChild(document.createElement('br'));
+        var em=document.createElement('em'); em.textContent='You\u2019ve built a branch.'; h.appendChild(em);
+      }
+      if(e) e.textContent=(f?('Prepared for '+f+' \u00B7 '):'')+'Your branch \u00B7 Your people \u00B7 Your next chapter';
+      var pi=el('bm-prod');
+      if(pi && PZ && PZ.deckv==='bm' && PZ.volume>0){
+        pi.value=Math.round(PZ.volume/12).toLocaleString('en-US');
+        try{ pi.dispatchEvent(new Event('input',{bubbles:true})); }catch(err){}
+      }
+    })();
     // studio launch links carry the prospect's name
     (function(){
       var nm=(PZ&&PZ.name)?PZ.name:'';
       var q=nm?('?pmname='+encodeURIComponent(nm)):'';
-      var ids=['tc-social','tc-flyer','nw-social','nw-flyer'];
+      var ids=['tc-social','tc-flyer','nw-social','nw-flyer','bm-social','bm-flyer'];
       for(var si=0; si<ids.length; si++){
         var a=el(ids[si]);
         if(a&&a.getAttribute&&a.getAttribute('data-base')) a.setAttribute('href', a.getAttribute('data-base')+q);
@@ -3852,6 +4257,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     var __callOn=!!(d&&d.callOn);
     var __cta=el('cta-call'); if(__cta) __cta.style.display=__callOn?'':'none';
     var __cta2=el('cta-call2'); if(__cta2) __cta2.style.display=__callOn?'':'none';
+    var __cta3=el('cta-call3'); if(__cta3) __cta3.style.display=__callOn?'':'none';
     if(__callOn){
       el('close-lede').textContent = fn
         ? ("Book a 15-minute discovery call, "+fn+". No pressure, no hard sell, just a real conversation about your future. Peter is your first call, no gatekeepers.")
@@ -3902,8 +4308,17 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   var mgrPhoto='';
   var DECKV='old';
   function fillSetup(d){
-    DECKV=(d&&d.deckv==='new')?'new':'old';
-    var sue=el('su-eyebrow'); if(sue) sue.textContent=(DECKV==='new')?'Personalize \u00B7 New presentation':'Personalize \u00B7 Old presentation';
+    DECKV=(d&&(d.deckv==='new'||d.deckv==='bm'))?d.deckv:'old';
+    var sue=el('su-eyebrow'); if(sue) sue.textContent=(DECKV==='new')?'Personalize \u00B7 New presentation':(DECKV==='bm')?'Personalize \u00B7 Branch Manager presentation':'Personalize \u00B7 Old presentation';
+    /* branch deck: no LO comp calculator, so hide its inputs and toggle */
+    (function(){
+      var isBM=(DECKV==='bm');
+      var lt=el('su-lm-tgl'), lr=(lt&&lt.closest)?lt.closest('.lmrow'):null; if(lr) lr.style.display=isBM?'none':'';
+      var pb=el('su-pmbps'), pr=(pb&&pb.closest)?pb.closest('.row2'):null; if(pr) pr.style.display=isBM?'none':'';
+      var cb=el('su-bps'), cr=(cb&&cb.parentNode)?cb.parentNode:null; if(cr&&cr.style) cr.style.display=isBM?'none':'';
+      var divs=document.querySelectorAll('#setup .su-div'); if(divs[1]) divs[1].textContent=isBM?'Presentation options':'Their offer at Partners';
+      var vl=document.querySelector('label[for="su-volume"]'); if(vl) vl.textContent=isBM?'Branch volume, last 12 months':'Last 12 months volume';
+    })();
     el('su-name').value=d.name||''; el('su-company').value=d.company||'';
     el('su-volume').value=d.volume>0?fmtInt(d.volume):'';
     el('su-units').value=d.units>0?d.units:''; el('su-bps').value=d.bps>0?d.bps:'';
@@ -4052,6 +4467,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
   }
   el('vchoose-old').addEventListener('click',function(){ pickDeckV('old'); });
   el('vchoose-new').addEventListener('click',function(){ pickDeckV('new'); });
+  el('vchoose-bm').addEventListener('click',function(){ pickDeckV('bm'); });
   el('vchoose-back').addEventListener('click',function(){ overlaySwap(el('vchoose'), deckhomeEl); });
   el('deckhome-lib').addEventListener('click',function(){ renderDeckLib(); overlaySwap(deckhomeEl, decklibEl); });
   el('deckhome-back').addEventListener('click',function(){ overlaySwap(deckhomeEl, modeEl); });
@@ -4128,7 +4544,7 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
       var sh=doc.querySelectorAll('.show'); for(var i=0;i<sh.length;i++){ sh[i].classList.remove('show'); }
       var ac=doc.querySelectorAll('.slide.active,.slide.leaving,.slide.anim'); for(var j=0;j<ac.length;j++){ ac[j].classList.remove('active','leaving','anim'); ac[j].style.animation=''; }
       // viewer-only: strip builder chrome from the shared copy
-      var strip=doc.querySelectorAll('#savebtn,#homebtn,#editbtn,#mode,#loi,#builder,#deckhome,#decklib,#setup,#decksave,#pubmodal,#preview,#vchoose'); for(var k=0;k<strip.length;k++){ strip[k].parentNode.removeChild(strip[k]); }
+      var strip=doc.querySelectorAll('#savebtn,#homebtn,#editbtn,#mode,#loi,#builder,#deckhome,#decklib,#setup,#decksave,#pubmodal,#preview,#vchoose,#ttbtn,#ttpanel'); for(var k=0;k<strip.length;k++){ strip[k].parentNode.removeChild(strip[k]); }
       var hint=doc.querySelector('#hint');
       if(hint) hint.innerHTML='<span class="k">\u2190</span><span class="k">\u2192</span> navigate \u00B7 <span class="k">G</span> all slides \u00B7 <span class="k">F</span> fullscreen';
     }catch(e){}
@@ -4331,6 +4747,104 @@ h1.display em::after{content:'';position:absolute;left:1%;right:3%;bottom:.03em;
     layout();
     if(typeof MutationObserver!=='undefined'){
       new MutationObserver(function(){ arm(); }).observe(slide,{attributes:true,attributeFilter:['class']});
+    }
+  })();
+
+  /* ===== presenter talk track (author only, never in shared links) ===== */
+  function ttSync(i){
+    var b=el('ttbtn'), p=el('ttpanel'); if(!b||!p||!p.classList) return;
+    var s=(typeof i==='number'&&slides)?slides[i]:null;
+    var n=(!SHARED&&s&&s.getAttribute)?(s.getAttribute('data-notes')||''):'';
+    b.style.display=n?'':'none';
+    if(!n){ p.classList.remove('show'); b.classList.remove('on'); return; }
+    var t=el('tt-t'), bd=el('tt-b');
+    if(t) t.textContent=pad(i+1)+' \u00B7 '+(s.getAttribute('data-title')||'');
+    if(bd) bd.textContent=n;
+  }
+  function toggleTT(force){
+    var p=el('ttpanel'), b=el('ttbtn'); if(!p||!p.classList||SHARED) return;
+    var s=slides&&slides[cur]; if(!s||!s.getAttribute('data-notes')){ p.classList.remove('show'); return; }
+    var on=(typeof force==='boolean')?force:!p.classList.contains('show');
+    p.classList.toggle('show',on); if(b&&b.classList) b.classList.toggle('on',on);
+  }
+  (function(){
+    var b=el('ttbtn'); if(b&&b.addEventListener) b.addEventListener('click',function(){ toggleTT(); });
+    var x=el('tt-x'); if(x&&x.addEventListener) x.addEventListener('click',function(){ toggleTT(false); });
+  })();
+
+  /* ===== branch manager deck interactions ===== */
+  (function(){
+    /* discovery check-offs */
+    var bd=document.querySelector('.bm-disc');
+    if(bd) bd.addEventListener('click',function(e){ var q=e.target.closest('.nw-q'); if(q) q.classList.toggle('done'); });
+
+    /* generic tab switcher: list of buttons drives matching panels */
+    function tabs(rootSel, btnSel, panelSel){
+      var root=document.querySelector(rootSel); if(!root) return;
+      root.addEventListener('click',function(e){
+        var b=e.target.closest(btnSel); if(!b||!root.contains(b)) return;
+        var i=b.getAttribute('data-i');
+        var bs=root.querySelectorAll(btnSel); for(var k=0;k<bs.length;k++) bs[k].classList.toggle('on',bs[k]===b);
+        var ps=root.querySelectorAll(panelSel); for(var j=0;j<ps.length;j++) ps[j].classList.toggle('on',ps[j].getAttribute('data-i')===i);
+      });
+    }
+    tabs('#bm-prio','.bm-pr','.bm-pd');
+    var chRoot=document.getElementById('bm-chs');
+    if(chRoot){
+      chRoot.addEventListener('click',function(e){
+        var b=e.target.closest('.bm-ch'); if(!b) return;
+        var i=b.getAttribute('data-i');
+        var bs=chRoot.querySelectorAll('.bm-ch'); for(var k=0;k<bs.length;k++) bs[k].classList.toggle('on',bs[k]===b);
+        var ds=document.querySelectorAll('.bm-cd'); for(var j=0;j<ds.length;j++) ds[j].classList.toggle('on',ds[j].getAttribute('data-i')===i);
+      });
+    }
+
+    /* P3 for branches: spotlights + quotes come from the shared P3 deck */
+    var bt=document.getElementById('bp3-tabs'), card=document.getElementById('bp3-card');
+    if(bt && card){
+      var btns=Array.prototype.slice.call(bt.querySelectorAll('button')), bi=0;
+      var srcFor=function(name){ var c=document.querySelector('#p3-stack .p3c[data-name="'+name+'"]'); return c?{src:c.querySelector('img').src,q:c.getAttribute('data-q')}:null; };
+      var put=function(){
+        var b=btns[bi], s=srcFor(b.getAttribute('data-name'));
+        if(s){ document.getElementById('bp3-img').src=s.src; document.getElementById('bp3-q').textContent=s.q; }
+        document.getElementById('bp3-name').textContent=b.getAttribute('data-name');
+        document.getElementById('bp3-nmls').textContent=b.getAttribute('data-nmls');
+        document.getElementById('bp3-match').textContent=b.getAttribute('data-match');
+        document.getElementById('bp3-ct').textContent=(bi<9?'0':'')+(bi+1)+' / '+(btns.length<10?'0':'')+btns.length;
+        for(var k=0;k<btns.length;k++) btns[k].classList.toggle('on',k===bi);
+        card.classList.remove('swap');
+      };
+      var setB=function(i){ bi=(i%btns.length+btns.length)%btns.length; if(reduce){ put(); return; } card.classList.add('swap'); setTimeout(put,240); };
+      bt.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) setB(+b.getAttribute('data-i')); });
+      document.getElementById('bp3-next').addEventListener('click',function(){ setB(bi+1); });
+      document.getElementById('bp3-prev').addEventListener('click',function(){ setB(bi-1); });
+      put();
+    }
+
+    /* branch economics */
+    var pI=document.getElementById('bm-prod'), cI=document.getElementById('bm-cur'), mI=document.getElementById('bm-pm');
+    if(pI && cI && mI){
+      var lastAnnual=120000;
+      var money=function(n){ return (n<0?'-$':'$')+Math.round(Math.abs(n)).toLocaleString('en-US'); };
+      var calc=function(){
+        var prod=+String(pI.value).replace(/[^0-9.]/g,'')||0;
+        var cur=parseFloat(cI.value)||0, pm=parseFloat(mI.value)||0;
+        var mCur=prod*cur/10000, mPm=prod*pm/10000, mDiff=mPm-mCur, ann=mDiff*12;
+        var big=document.getElementById('bm-annual');
+        if(typeof animateNumber==='function' && ann>=0 && !reduce){ animateNumber(big, Math.round(ann), {prefix:'$', from:Math.max(0,lastAnnual), dur:700}); }
+        else big.textContent=money(ann);
+        lastAnnual=ann;
+        var d=pm-cur, dTxt=(Math.round(d*10)/10)+' bps';
+        document.getElementById('bm-line').textContent='At the same production, a '+dTxt+' difference equals '+money(mDiff)+' per month.';
+        document.getElementById('bm-v-cur').textContent=money(mCur);
+        document.getElementById('bm-v-pm').textContent=money(mPm);
+        var mx=Math.max(mCur,mPm,1);
+        document.getElementById('bm-bar-cur').style.width=Math.max(2,mCur/mx*100)+'%';
+        document.getElementById('bm-bar-pm').style.width=Math.max(2,mPm/mx*100)+'%';
+      };
+      pI.addEventListener('input',function(){ var n=+String(pI.value).replace(/[^0-9]/g,''); pI.value=n?n.toLocaleString('en-US'):''; calc(); });
+      cI.addEventListener('input',calc); mI.addEventListener('input',calc);
+      calc();
     }
   })();
 
@@ -5294,7 +5808,7 @@ else{dl(bytes,fn);mailPeter(name);st('Your signed letter downloaded and an email
       try{ decklibEl.classList.remove('show'); }catch(e){}
       try{ setup.classList.remove('show'); }catch(e){}
       try{
-        var lockIds=['savebtn','homebtn','editbtn'];
+        var lockIds=['savebtn','homebtn','editbtn','ttbtn','ttpanel'];
         for(var li=0;li<lockIds.length;li++){ var lb=el(lockIds[li]); if(lb&&lb.parentNode) lb.parentNode.removeChild(lb); }
         var hintEl=el('hint');
         if(hintEl) hintEl.innerHTML='<span class="k">\u2190</span><span class="k">\u2192</span> navigate \u00B7 <span class="k">G</span> all slides \u00B7 <span class="k">F</span> fullscreen';
